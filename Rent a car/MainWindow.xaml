@@ -1,0 +1,50 @@
+﻿<mah:MetroWindow x:Class="Rent_a_car.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Rent_a_car"
+        mc:Ignorable="d"
+        Title="Rent A Car" Height="800" Width="1200" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="/sedan.png">
+    <Grid>
+
+        <TabControl TabStripPlacement="Left" Style="{DynamicResource MahApps.Styles.TabControl.AnimatedSingleRow}" Margin="0,78,0,531">
+            <TabItem Name="arenda"  Header="Arenda" Margin="0,-3,-3,-1"  mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22">
+
+                <TabItem.Content>
+                    <Frame Background="DarkGray" Margin="0,-80,-3,-533">
+
+                    </Frame>
+                </TabItem.Content>
+            </TabItem>
+
+            <TabItem Name="avtomobillar" Header="Avtomobillar" Margin="0,1,-3,-4" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22">
+                <TabItem.Content>
+                    <Frame Background="DarkGray" Margin="0,-80,-3,-533">
+
+                    </Frame>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Name="klientlar" Header="Mijozlar" Margin="0,4,-3,-7" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22">
+                <TabItem.Content>
+                    <Frame Background="DarkGray" Margin="0,-80,-3,-533">
+
+                    </Frame>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Name="tolovlar" Header="To'lovlar" Margin="0,8,-3,-10" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22">
+                <TabItem.Content>
+                    <Frame Background="DarkGray" Margin="0,-80,-3,-533">
+
+                    </Frame>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+        <Label Name="logo" Content="Rent A Car" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24"/>
+        <Label Content="______________" HorizontalAlignment="Left" Margin="15,25,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24" Foreground="#FFFF0202"/>
+        <mah:ToggleSwitch Height="100" Header="Tungi rejim:" Margin="10,274,0,0" VerticalAlignment="Top" Width="100" OffContent="Off" OnContent="On" Toggled="ThemeChange" FontFamily="Orbitron" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold"/>
+
+
+    </Grid>
+</mah:MetroWindow>

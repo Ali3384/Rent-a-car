@@ -106,7 +106,7 @@ namespace Rent_a_car.pages.clients
             clientsaddwindow.ShowDialog();
             updateClient();
         }
-        private void updateClient()
+        public void updateClient()
         {
             clients.Clear();
             clients.Columns["Mijoz ID"].ColumnName = "Client_ID";

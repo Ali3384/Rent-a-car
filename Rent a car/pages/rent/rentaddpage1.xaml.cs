@@ -95,7 +95,8 @@ namespace Rent_a_car.pages.rent
                 {
                     System.Data.DataRow myRow = row.Row;
                     Properties.Settings.Default.SelectedClientName = myRow["Ismi"].ToString();
-                    Properties.Settings.Default.SelectedClientName = myRow["Familiyasi"].ToString();
+                    Properties.Settings.Default.SelectedClientSurname = myRow["Familiyasi"].ToString();
+                    Properties.Settings.Default.SelectedClientID = myRow["Mijoz ID"].ToString();
                     Properties.Settings.Default.Save();
                 }
                 NavigationService.Navigate(new rentaddpage2());

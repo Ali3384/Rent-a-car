@@ -52,35 +52,37 @@ namespace Rent_a_car.pages.rent
                         insertCmd.Parameters.AddWithValue("@name", Properties.Settings.Default.SelectedClientName);
                         insertCmd.Parameters.AddWithValue("@surname", Properties.Settings.Default.SelectedClientSurname);                        
                         insertCmd.Parameters.AddWithValue("@cost", int.Parse(costtxt.Text));
-                        insertCmd.Parameters.AddWithValue("@from", datefrompicker.SelectedDate.Value.ToString("yyyy-mm-dd"));
+                        insertCmd.Parameters.AddWithValue("@from", datefrompicker.SelectedDate.Value.ToString("yyyy-MM-dd"));
                         insertCmd.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error while filling data: " + ex.Message);
+                    MessageBox.Show("Error while filling data into rentings: " + ex.Message);
                 }
                 
                 try
                 {
-                    string periodUntil = datefrompicker.SelectedDate.Value.AddDays(7).ToString("yyyy-mm-dd");
+                    string periodUntil = datefrompicker.SelectedDate.Value.AddDays(7).ToString("yyyy-MM-dd");
                     connection = new MySqlConnection(connectionString);
                     connection.Open();
-                    string insertQuery = "INSERT INTO rentperiods (Car_Plate_No, Client_Name, Payment_Status, Period_Cost, Period_From, Period_Until, Period_Status) VALUES (@plate, @name, 'Aktiv', @cost, @from, @until)";
+                    string insertQuery = "INSERT INTO rentperiods (Car_Plate_No, Client_Name, Payment_Status, Period_Cost, Period_From, Period_Until, Period_Status, Client_ID) VALUES (@plate, @name, 'Tolanmagan', @cost, @from, @until, 'aktiv', @clientid)";
                     using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                     {
                         insertCmd.Parameters.AddWithValue("@plate", Properties.Settings.Default.SelectedCarPlate);
                         insertCmd.Parameters.AddWithValue("@name", Properties.Settings.Default.SelectedClientName);
                         insertCmd.Parameters.AddWithValue("@cost", int.Parse(costtxt.Text));
-                        insertCmd.Parameters.AddWithValue("@from", datefrompicker.SelectedDate.Value.ToString("yyyy-mm-dd"));
+                        insertCmd.Parameters.AddWithValue("@from", datefrompicker.SelectedDate.Value.ToString("yyyy-MM-dd"));
                         insertCmd.Parameters.AddWithValue("@until", periodUntil);
+                        insertCmd.Parameters.AddWithValue("@clientid", Properties.Settings.Default.SelectedClientID);
                         insertCmd.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error while filling data: " + ex.Message);
+                    MessageBox.Show("Error while filling data into rentperiods: " + ex.Message);
                 }
+                inactiveCar();
                 this.Close();
             }
             else
@@ -88,5 +90,25 @@ namespace Rent_a_car.pages.rent
                 MessageBox.Show("Iltimos barcha ma'lumot kiriting.", "Hato", MessageBoxButton.OK);
             }
         }
+        private void inactiveCar()
+        {
+            MySqlConnection connection = null;
+            try
+            {
+                connection = new MySqlConnection(connectionString);
+                connection.Open();
+                string insertQuery = "UPDATE cars SET Cars_Status = 'Arendada' WHERE Cars_No = @plate";
+                using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
+                {
+                    insertCmd.Parameters.AddWithValue("@plate", Properties.Settings.Default.SelectedCarPlate);
+                    insertCmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while updating data: " + ex.Message);
+            }
+        }
+
     }
 }

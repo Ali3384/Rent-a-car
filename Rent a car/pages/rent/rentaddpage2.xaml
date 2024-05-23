@@ -6,11 +6,11 @@
       xmlns:local="clr-namespace:Rent_a_car.pages.rent"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1200"
-      Title="rentaddpage2">
+      Title="rentaddpage2" ShowsNavigationUI="False">
 
     <Grid Background="WhiteSmoke">
         <DataGrid Name="carsdatagrid" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="0,150,0,0" Background="White" FontFamily="Times New Roman" GridLinesVisibility="Horizontal"/>
-        <Button Name="nextbtn" Content="Keyingi Etap" HorizontalAlignment="Left" Margin="1010,103,0,0" VerticalAlignment="Top" Width="159" Background="LightBlue" Height="38" FontFamily="Orbitron" Click="nextbtn_Click"/>
+        <Button Name="nextbtn" Content="Keyingi Etap" HorizontalAlignment="Left" Margin="976,103,0,0" VerticalAlignment="Top" Width="159" Background="LightBlue" Height="38" FontFamily="Orbitron" Click="nextbtn_Click"/>
         <TextBox Name="carsfilter" HorizontalAlignment="Left" Margin="73,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" FontFamily="Orbitron" TextChanged="carsfilter_TextChanged"/>
         <Label Content="Qidiruv:" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>
         <Label Content="Qidiruv turi:" HorizontalAlignment="Left" Margin="246,103,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>

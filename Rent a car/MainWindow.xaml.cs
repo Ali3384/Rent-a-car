@@ -1,31 +1,19 @@
 ﻿using ControlzEx.Theming;
 using MahApps.Metro.Controls;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
+using Rent_a_car.pages.clients;
+using Rent_a_car.pages.rent;
+using Rent_a_car.pages.cars;
 
 namespace Rent_a_car
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow
     {
         string connectionString = Properties.Settings.Default.ConnectionString;
         double debitstatus;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,12 +23,13 @@ namespace Rent_a_car
             paymentsframe.Content = new Rent_a_car.pages.payments.paymentsmainpage();
             UpdateDebitStatus();
         }
+
         public void ThemeChange(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = sender as ToggleSwitch;
-            if(toggleSwitch != null)
+            if (toggleSwitch != null)
             {
-                if(toggleSwitch.IsOn)
+                if (toggleSwitch.IsOn)
                 {
                     ThemeManager.Current.ChangeTheme(this, "Dark.Steel");
                 }
@@ -52,6 +41,7 @@ namespace Rent_a_car
             ThemeManager.Current.ThemeSyncMode = ThemeSyncMode.SyncWithAppMode;
             ThemeManager.Current.SyncTheme();
         }
+
         public void UpdateDebitStatus()
         {
             try
@@ -69,6 +59,129 @@ namespace Rent_a_car
                 MessageBox.Show("Error while updating debit status: " + ex.Message);
             }
             qarzlar.Content = debitstatus.ToString() + " zl";
+        }
+
+        public void UpdateDatabase()
+        {
+            string selectQuery = "SELECT *, STR_TO_DATE(Period_Until, '%Y-%m-%d') AS ConvertedDate, CURDATE() FROM rentperiods WHERE STR_TO_DATE(Period_From, '%Y-%m-%d') <= CURDATE() AND period_status != 'passed';"; 
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    MySqlCommand selectCommand = new MySqlCommand(selectQuery, connection);
+                    using (MySqlDataReader reader = selectCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            MessageBox.Show("hello");
+                            int periodId = reader.GetInt32("Period_ID");
+                            string clientName = reader.GetString("Client_Name");
+                            string carPlateNo = reader.GetString("Car_Plate_No");
+                            DateTime periodFrom = DateTime.ParseExact(reader.GetString("Period_Until"), "yyyy-MM-dd", null);
+                            DateTime periodUntil = periodFrom.AddDays(7); // Adding 7 days to Period_From
+                            int periodCost = reader.GetInt32("Period_Cost");
+                            string paymentStatus = reader.GetString("Payment_Status");
+                            int clientID = reader.GetInt32("Client_ID");
+
+                            // Step 1: Insert the copied row
+                            InsertCopiedRow(clientName, carPlateNo, periodFrom, periodUntil, periodCost, paymentStatus, clientID);
+
+                            // Step 2: Update the original row's Period_Status to 'passed'
+                            UpdateOriginalRow(periodId);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+            }
+        }
+
+        private void InsertCopiedRow(string clientName, string carPlateNo, DateTime periodFrom, DateTime periodUntil, int periodCost, string paymentStatus, int clientID)
+        {
+            string insertQuery = "INSERT INTO rentperiods (Client_Name, Car_Plate_No, Period_From, Period_Until, Period_Cost, Payment_Status, Period_Status, Client_ID) " +
+                                 "VALUES (@Client_Name, @Car_Plate_No, @Period_From, @Period_Until, @Period_Cost, @Payment_Status, 'aktiv', @Client_ID);";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection);
+                insertCommand.Parameters.AddWithValue("@Client_Name", clientName);
+                insertCommand.Parameters.AddWithValue("@Car_Plate_No", carPlateNo);
+                insertCommand.Parameters.AddWithValue("@Period_From", periodFrom.ToString("yyyy-MM-dd"));
+                insertCommand.Parameters.AddWithValue("@Period_Until", periodUntil.ToString("yyyy-MM-dd"));
+                insertCommand.Parameters.AddWithValue("@Period_Cost", periodCost);
+                insertCommand.Parameters.AddWithValue("@Payment_Status", paymentStatus);
+                insertCommand.Parameters.AddWithValue("@Client_ID", clientID);
+                try
+                {
+                    connection.Open();
+                    insertCommand.ExecuteNonQuery();
+                    UpdateClientDebit(clientID, periodCost);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+            }
+        }
+
+        private void UpdateOriginalRow(int periodId)
+        {
+            string updateQuery = "UPDATE rentperiods SET Period_Status = 'passed' WHERE Period_ID = @Period_ID;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection);
+                updateCommand.Parameters.AddWithValue("@Period_ID", periodId);
+
+                try
+                {
+                    connection.Open();
+                    updateCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+            }
+        }
+
+        private void UpdateClientDebit(int clientID, int periodCost)
+        {
+            string updateDebitQuery = "UPDATE clients SET Client_Debit = Client_Debit + @Amount WHERE Client_ID = @Client_ID;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand updateDebitCommand = new MySqlCommand(updateDebitQuery, connection);
+                updateDebitCommand.Parameters.AddWithValue("@Client_ID", clientID);
+                updateDebitCommand.Parameters.AddWithValue("@Amount", periodCost);
+
+                try
+                {
+                    connection.Open();
+                    updateDebitCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+            }
+        }
+        clientsmainpage clientsmainpage = new clientsmainpage();
+        rentmainpage rentmainpage = new rentmainpage();
+        carsmainpage carsmainpage = new carsmainpage();
+
+        private void klientlar_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateDatabase();
+            clientsmainpage.updateClient();
+            carsmainpage.updateCar();
+            rentmainpage.updateRent();
+
         }
 
         

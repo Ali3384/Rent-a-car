@@ -136,11 +136,8 @@ namespace Rent_a_car.pages.cars
             carsaddwindow.ShowDialog();
             updateCar();
         }
-        private void updateCar()
+        public void updateCar()
         {
-
-           
-
             cars.Clear();
             cars.Columns["ID"].ColumnName = "Cars_ID";
             cars.Columns["Markasi"].ColumnName = "Cars_Brand";

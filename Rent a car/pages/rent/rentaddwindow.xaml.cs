@@ -26,6 +26,7 @@ namespace Rent_a_car.pages.rent
         public rentaddwindow()
         {
             InitializeComponent();
+            rentaddframe.Content = new rentaddpage1();
         }
 
         

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:Rent_a_car"
         mc:Ignorable="d"
         Title="Rent A Car" Height="800" Width="1200" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="/sedan.png" >
@@ -28,7 +29,7 @@
                     </Frame>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Name="klientlar" Header="Mijozlar" Margin="0,4,-3,-7" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22">
+            <TabItem Name="klientlar" Header="Mijozlar" Margin="0,4,-3,-7" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22" Loaded="klientlar_Loaded">
                 <TabItem.Content>
                     <Frame Name="clientsframe" Background="DarkGray" Margin="26,-80,-3,-533">
 
@@ -59,6 +60,9 @@
         </Label>
         <mah:ToggleSwitch Height="100" IsEnabled="True" Visibility="Visible" Header="Tungi rejim:" Margin="10,274,0,0" VerticalAlignment="Top" Width="100" OffContent="Off" OnContent="On" Toggled="ThemeChange" FontFamily="Orbitron" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold"/>
         <Label Name="qarzlar" Content="" HorizontalAlignment="Left" Foreground="OrangeRed" Margin="10,510,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24"/>
+        <Button Style="{DynamicResource MahApps.Styles.Button.Circle}" HorizontalAlignment="Left" Margin="15,374,0,0" VerticalAlignment="Top" Width="33" Height="33">
+            <iconPacks:Modern Kind="Refresh"/>
+        </Button>
 
 
     </Grid>

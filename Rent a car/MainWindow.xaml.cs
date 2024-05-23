@@ -14,6 +14,7 @@ namespace Rent_a_car
         string connectionString = Properties.Settings.Default.ConnectionString;
         double debitstatus;
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -23,7 +24,10 @@ namespace Rent_a_car
             paymentsframe.Content = new Rent_a_car.pages.payments.paymentsmainpage();
             UpdateDebitStatus();
         }
+        public void ThemeChangeEvery()
+        {
 
+        }
         public void ThemeChange(object sender, RoutedEventArgs e)
         {
             ToggleSwitch toggleSwitch = sender as ToggleSwitch;
@@ -76,7 +80,6 @@ namespace Rent_a_car
                     {
                         while (reader.Read())
                         {
-                            MessageBox.Show("hello");
                             int periodId = reader.GetInt32("Period_ID");
                             string clientName = reader.GetString("Client_Name");
                             string carPlateNo = reader.GetString("Car_Plate_No");
@@ -184,6 +187,9 @@ namespace Rent_a_car
 
         }
 
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateDebitStatus();
+        }
     }
 }

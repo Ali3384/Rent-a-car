@@ -102,25 +102,25 @@ namespace Rent_a_car.pages.cars
                     {
                         if ((date - DateTime.Now).TotalDays < 10)
                         {
-                            
-                            e.Row.Background = new SolidColorBrush(Colors.Red);
-                            
-                        }
+
+                        e.Row.Background = new SolidColorBrush(Color.FromRgb(255, 127, 127));
+
+                    }
                     }
                     
                     if (DateTime.TryParse(lpgdateStr, out DateTime date1))
                     {
                         if ((date1 - DateTime.Now).TotalDays < 30)
                         {
-                            e.Row.Background = new SolidColorBrush(Colors.Red);
-                        }
+                        e.Row.Background = new SolidColorBrush(Color.FromRgb(255, 127, 127));
+                    }
                     }
                     if (DateTime.TryParse(servicedateStr, out DateTime date2))
                     {
                         if ((date2 - DateTime.Now).TotalDays < 30)
                         {
-                            e.Row.Background = new SolidColorBrush(Colors.Red);
-                        }
+                        e.Row.Background = new SolidColorBrush(Color.FromRgb(255, 127, 127));
+                    }
                     }
                 }
         }
@@ -152,6 +152,11 @@ namespace Rent_a_car.pages.cars
             cars.Columns["LPG"].ColumnName = "Cars_LPG_Date";
             fillCarsTable();
             carsdatagrid.Items.Refresh();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            updateCar();
         }
     }
 }

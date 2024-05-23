@@ -118,5 +118,10 @@ namespace Rent_a_car.pages.clients
             fillClientsTable();
             clientsdatagrid.Items.Refresh();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            updateClient();
+        }
     }
 }

@@ -60,9 +60,10 @@
         </Label>
         <mah:ToggleSwitch Height="100" IsEnabled="True" Visibility="Visible" Header="Tungi rejim:" Margin="10,274,0,0" VerticalAlignment="Top" Width="100" OffContent="Off" OnContent="On" Toggled="ThemeChange" FontFamily="Orbitron" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold"/>
         <Label Name="qarzlar" Content="" HorizontalAlignment="Left" Foreground="OrangeRed" Margin="10,510,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24"/>
-        <Button Style="{DynamicResource MahApps.Styles.Button.Circle}" HorizontalAlignment="Left" Margin="15,374,0,0" VerticalAlignment="Top" Width="33" Height="33">
+        <Button Style="{DynamicResource MahApps.Styles.Button.Circle}" HorizontalAlignment="Left" Margin="15,374,0,0" VerticalAlignment="Top" Width="33" Height="33" Click="Button_Click">
             <iconPacks:Modern Kind="Refresh"/>
         </Button>
+        <Label Content="Yangilash" HorizontalAlignment="Left" Margin="53,374,0,0" VerticalAlignment="Top" Height="47" Width="108" FontFamily="Orbitron" FontSize="18"/>
 
 
     </Grid>

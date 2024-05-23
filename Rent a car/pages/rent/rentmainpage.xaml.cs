@@ -102,5 +102,10 @@ namespace Rent_a_car.pages.rent
             fillRentTable();
             rentdatagrid.Items.Refresh();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            updateRent();
+        }
     }
 }

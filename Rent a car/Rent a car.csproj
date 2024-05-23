@@ -137,6 +137,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="pages\cars\carsaddwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\cars\carsmainpage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -153,12 +157,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="pages\rent\rentaddpage1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\rent\rentaddpage2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\rent\rentaddpage4window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\rent\rentaddwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\rent\rentmainpage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="pages\cars\carsaddwindow.xaml.cs">
+      <DependentUpon>carsaddwindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\cars\carsmainpage.xaml.cs">
       <DependentUpon>carsmainpage.xaml</DependentUpon>
     </Compile>
@@ -170,6 +193,18 @@
     </Compile>
     <Compile Include="pages\payments\paymentsmainpage.xaml.cs">
       <DependentUpon>paymentsmainpage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\rent\rentaddpage1.xaml.cs">
+      <DependentUpon>rentaddpage1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\rent\rentaddpage2.xaml.cs">
+      <DependentUpon>rentaddpage2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\rent\rentaddpage4window.xaml.cs">
+      <DependentUpon>rentaddpage4window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\rent\rentaddwindow.xaml.cs">
+      <DependentUpon>rentaddwindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\rent\rentmainpage.xaml.cs">
       <DependentUpon>rentmainpage.xaml</DependentUpon>

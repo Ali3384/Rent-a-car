@@ -71,5 +71,6 @@ namespace Rent_a_car
             qarzlar.Content = debitstatus.ToString() + " zl";
         }
 
+        
     }
 }

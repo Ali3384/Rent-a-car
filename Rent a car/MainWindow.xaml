@@ -6,14 +6,16 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Rent_a_car"
         mc:Ignorable="d"
-        Title="Rent A Car" Height="800" Width="1200" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="/sedan.png">
+        Title="Rent A Car" Height="800" Width="1200" SnapsToDevicePixels="True" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="/sedan.png" >
+
     <Grid>
 
-        <TabControl TabStripPlacement="Left" Style="{DynamicResource MahApps.Styles.TabControl.AnimatedSingleRow}" Margin="0,78,0,531">
+
+        <TabControl TabStripPlacement="Left" Style="{DynamicResource MahApps.Styles.TabControl.AnimatedSingleRow}" Margin="0,78,0,531"  Grid.ColumnSpan="3">
             <TabItem Name="arenda"  Header="Arenda" Margin="0,-3,-3,-1"  mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22">
 
                 <TabItem.Content>
-                    <Frame Name="rentframe" Background="DarkGray" Margin="0,-80,-3,-533">
+                    <Frame Name="rentframe" Background="DarkGray" Margin="26,-80,-3,-533">
 
                     </Frame>
                 </TabItem.Content>
@@ -21,30 +23,41 @@
 
             <TabItem Name="avtomobillar" Header="Avtomobillar" Margin="0,1,-3,-4" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22">
                 <TabItem.Content>
-                    <Frame Name="carsframe" Background="DarkGray" Margin="0,-80,-3,-533">
+                    <Frame Name="carsframe" Background="DarkGray" Margin="26,-80,-3,-533">
 
                     </Frame>
                 </TabItem.Content>
             </TabItem>
             <TabItem Name="klientlar" Header="Mijozlar" Margin="0,4,-3,-7" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22">
                 <TabItem.Content>
-                    <Frame Name="clientsframe" Background="DarkGray" Margin="0,-80,-3,-533">
+                    <Frame Name="clientsframe" Background="DarkGray" Margin="26,-80,-3,-533">
 
                     </Frame>
                 </TabItem.Content>
             </TabItem>
             <TabItem Name="tolovlar" Header="To'lovlar" Margin="0,8,-3,-10" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22">
                 <TabItem.Content>
-                    <Frame Name="paymentsframe" Background="DarkGray" Margin="0,-80,-3,-533">
+                    <Frame Name="paymentsframe" Background="DarkGray" Margin="26,-80,-3,-533">
 
                     </Frame>
                 </TabItem.Content>
             </TabItem>
         </TabControl>
+
         <Label Name="logo" Content="Rent A Car" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24"/>
         <Label Content="Qarzlar:" HorizontalAlignment="Left" Foreground="ForestGreen" Margin="10,470,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24"/>
-        <Label Content="______________" HorizontalAlignment="Left" Margin="15,25,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24" Foreground="#FFFF0202"/>
-        <mah:ToggleSwitch Height="100" Header="Tungi rejim:" Margin="10,274,0,0" VerticalAlignment="Top" Width="100" OffContent="Off" OnContent="On" Toggled="ThemeChange" FontFamily="Orbitron" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold"/>
+        <Label Content="______________" HorizontalAlignment="Left" Margin="15,25,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24" Foreground="#FFFF0202" Grid.ColumnSpan="2"/>
+        <Label Content="_________________________________________________________________________________" HorizontalAlignment="Left" Margin="-182,358,0,0" VerticalAlignment="Top" Height="62" Width="762" FontFamily="Times New Roman" FontSize="36" Foreground="DarkKhaki" RenderTransformOrigin="0.5,0.5" FontWeight="Bold">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <mah:ToggleSwitch Height="100" IsEnabled="True" Visibility="Visible" Header="Tungi rejim:" Margin="10,274,0,0" VerticalAlignment="Top" Width="100" OffContent="Off" OnContent="On" Toggled="ThemeChange" FontFamily="Orbitron" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold"/>
         <Label Name="qarzlar" Content="" HorizontalAlignment="Left" Foreground="OrangeRed" Margin="10,510,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24"/>
 
 

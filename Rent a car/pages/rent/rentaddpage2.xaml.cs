@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -16,16 +14,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
-
-namespace Rent_a_car.pages.cars
+namespace Rent_a_car.pages.rent
 {
-    public partial class carsmainpage : Page
+    /// <summary>
+    /// Логика взаимодействия для rentaddpage2.xaml
+    /// </summary>
+    public partial class rentaddpage2 : Page
     {
         string carscomboboxselection;
         string carsfiltertext;
         DataTable cars = new DataTable();
         string connectionString = Properties.Settings.Default.ConnectionString;
-        public carsmainpage()
+        public rentaddpage2()
         {
             InitializeComponent();
             fillCarsTable();
@@ -89,72 +89,21 @@ namespace Rent_a_car.pages.cars
             carscomboboxselection = ((ComboBoxItem)carscombobox.SelectedItem).Content.ToString();
         }
 
-        private void carsdatagrid_LoadingRow(object sender, DataGridRowEventArgs e)
+        private void nextbtn_Click(object sender, RoutedEventArgs e)
         {
-                DataRowView rowView = e.Row.Item as DataRowView;
-                if (rowView != null)
+            if (carsdatagrid.SelectedItems.Count > 0)
+            {
+                foreach (DataRowView row in carsdatagrid.SelectedItems)
                 {
-                    string insurancedateStr = rowView["Sug'urta"].ToString();
-                    string lpgdateStr = rowView["LPG"].ToString();
-                    string servicedateStr = rowView["Texnik ko'rik"].ToString();
-
-                    if (DateTime.TryParse(insurancedateStr, out DateTime date))
-                    {
-                        if ((date - DateTime.Now).TotalDays < 10)
-                        {
-                            
-                            e.Row.Background = new SolidColorBrush(Colors.Red);
-                            
-                        }
-                    }
-                    
-                    if (DateTime.TryParse(lpgdateStr, out DateTime date1))
-                    {
-                        if ((date1 - DateTime.Now).TotalDays < 30)
-                        {
-                            e.Row.Background = new SolidColorBrush(Colors.Red);
-                        }
-                    }
-                    if (DateTime.TryParse(servicedateStr, out DateTime date2))
-                    {
-                        if ((date2 - DateTime.Now).TotalDays < 30)
-                        {
-                            e.Row.Background = new SolidColorBrush(Colors.Red);
-                        }
-                    }
+                    System.Data.DataRow myRow = row.Row;
+                    Properties.Settings.Default.SelectedCarPlate = myRow["Raqami"].ToString();
+                    Properties.Settings.Default.Save();
                 }
-        }
-
-
-        
-
-
-        private void addcar_Click(object sender, RoutedEventArgs e)
-        {
-            
-            carsaddwindow carsaddwindow = new carsaddwindow();
-            carsaddwindow.ShowDialog();
-            updateCar();
-        }
-        private void updateCar()
-        {
-
-           
-
-            cars.Clear();
-            cars.Columns["ID"].ColumnName = "Cars_ID";
-            cars.Columns["Markasi"].ColumnName = "Cars_Brand";
-            cars.Columns["Modeli"].ColumnName = "Cars_Model";
-            cars.Columns["Yili"].ColumnName = "Cars_Year";
-            cars.Columns["Vin No"].ColumnName = "Cars_Vin";
-            cars.Columns["Raqami"].ColumnName = "Cars_No";
-            cars.Columns["Yoqilg'i turi"].ColumnName = "Cars_Fuel";
-            cars.Columns["Statusi"].ColumnName = "Cars_Status";
-            cars.Columns["Sug'urta"].ColumnName = "Cars_Insurance";
-            cars.Columns["Texnik ko'rik"].ColumnName = "Cars_ServiceDate";
-            cars.Columns["LPG"].ColumnName = "Cars_LPG_Date";
-            fillCarsTable();
-            carsdatagrid.Items.Refresh();
+               rentaddpage4window rentaddpage4Window = new rentaddpage4window();
+               rentaddpage4Window.ShowDialog();
+                Window current = Window.GetWindow(this);
+                current.Close();
+            }
         }
     }
 }

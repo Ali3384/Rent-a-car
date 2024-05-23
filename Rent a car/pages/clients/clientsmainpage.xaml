@@ -9,7 +9,7 @@
       Title="clientsmainpage" Background="WhiteSmoke">
 
     <Grid>
-        <DataGrid Name="clientsdatagrid" d:ItemsSource="{Binding}" Margin="0,80,0,0" Background="White" FontFamily="Times New Roman" LoadingRow="clientsdatagrid_LoadingRow">
+        <DataGrid Name="clientsdatagrid" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="0,80,0,0" Background="White" FontFamily="Times New Roman" LoadingRow="clientsdatagrid_LoadingRow">
 
         </DataGrid>
         <Button Name="deleteclient" Content="Mijozni o'chirish" HorizontalAlignment="Left" Margin="636,22,0,0" VerticalAlignment="Top" Width="131" Background="LightBlue" Height="38" FontFamily="Orbitron"/>

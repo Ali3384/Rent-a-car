@@ -35,5 +35,53 @@ namespace Rent_a_car.Properties {
                 this["ConnectionString"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SelectedClientName {
+            get {
+                return ((string)(this["SelectedClientName"]));
+            }
+            set {
+                this["SelectedClientName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SelectedClientSurname {
+            get {
+                return ((string)(this["SelectedClientSurname"]));
+            }
+            set {
+                this["SelectedClientSurname"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SelectedClientID {
+            get {
+                return ((string)(this["SelectedClientID"]));
+            }
+            set {
+                this["SelectedClientID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SelectedCarPlate {
+            get {
+                return ((string)(this["SelectedCarPlate"]));
+            }
+            set {
+                this["SelectedCarPlate"] = value;
+            }
+        }
     }
 }

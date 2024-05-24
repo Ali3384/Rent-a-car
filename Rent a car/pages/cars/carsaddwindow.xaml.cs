@@ -109,7 +109,7 @@ namespace Rent_a_car.pages.cars
             }
             else
             {
-                MessageBox.Show("Iltimos barcha ma'lumot kiriting.", "Hato", MessageBoxButton.OK);
+                MessageBox.Show("Iltimos barcha ma'lumot kiriting.", "Xato", MessageBoxButton.OK);
             }
         }
 

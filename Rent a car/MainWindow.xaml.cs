@@ -6,6 +6,8 @@ using MySql.Data.MySqlClient;
 using Rent_a_car.pages.clients;
 using Rent_a_car.pages.rent;
 using Rent_a_car.pages.cars;
+using System.Windows.Controls;
+using Rent_a_car.pages.payments;
 
 namespace Rent_a_car
 {
@@ -53,7 +55,7 @@ namespace Rent_a_car
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    MySqlCommand command = new MySqlCommand("SELECT SUM(Client_Debit) FROM clients", connection);
+                    MySqlCommand command = new MySqlCommand("SELECT SUM(Client_Debit) FROM clients WHERE Client_Status = 'aktiv'", connection);
                     object result = command.ExecuteScalar();
                     debitstatus = result != DBNull.Value ? Convert.ToDouble(result) : 0.0;
                 }
@@ -67,7 +69,7 @@ namespace Rent_a_car
 
         public void UpdateDatabase()
         {
-            string selectQuery = "SELECT *, STR_TO_DATE(Period_Until, '%Y-%m-%d') AS ConvertedDate, CURDATE() FROM rentperiods WHERE STR_TO_DATE(Period_From, '%Y-%m-%d') <= CURDATE() AND period_status != 'passed';"; 
+            string selectQuery = "SELECT *, STR_TO_DATE(Period_Until, '%Y-%m-%d') AS ConvertedDate, CURDATE() FROM rentperiods WHERE STR_TO_DATE(Period_From, '%Y-%m-%d') <= CURDATE() AND period_status != 'passed' AND Rent_Status = 'aktiv';"; 
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -106,8 +108,8 @@ namespace Rent_a_car
 
         private void InsertCopiedRow(string clientName, string carPlateNo, DateTime periodFrom, DateTime periodUntil, int periodCost, string paymentStatus, int clientID)
         {
-            string insertQuery = "INSERT INTO rentperiods (Client_Name, Car_Plate_No, Period_From, Period_Until, Period_Cost, Payment_Status, Period_Status, Client_ID) " +
-                                 "VALUES (@Client_Name, @Car_Plate_No, @Period_From, @Period_Until, @Period_Cost, @Payment_Status, 'aktiv', @Client_ID);";
+            string insertQuery = "INSERT INTO rentperiods (Client_Name, Car_Plate_No, Period_From, Period_Until, Period_Cost, Payment_Status, Period_Status, Client_ID,Rent_Status) " +
+                                 "VALUES (@Client_Name, @Car_Plate_No, @Period_From, @Period_Until, @Period_Cost, @Payment_Status, 'aktiv', @Client_ID, 'aktiv');";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -177,6 +179,8 @@ namespace Rent_a_car
         clientsmainpage clientsmainpage = new clientsmainpage();
         rentmainpage rentmainpage = new rentmainpage();
         carsmainpage carsmainpage = new carsmainpage();
+        paymentsmainpage paymentsmainpage = new paymentsmainpage();
+
 
         private void klientlar_Loaded(object sender, RoutedEventArgs e)
         {
@@ -184,12 +188,35 @@ namespace Rent_a_car
             clientsmainpage.updateClient();
             carsmainpage.updateCar();
             rentmainpage.updateRent();
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             UpdateDebitStatus();
+        }
+
+        private void TabControl_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (MainTab.SelectedItem != null)
+            {
+                TabItem selectedTab = (TabItem)MainTab.SelectedItem;
+                switch (selectedTab.Name)
+                {
+                    case "arenda":
+                        rentmainpage.updateRent();
+                        break;
+                    case "avtomobillar":
+                        carsmainpage.updateCar();
+                        break;
+                    case "klientlar":
+                        clientsmainpage.updateClient();
+                        break;
+                    case "tolovlar":
+                        paymentsmainpage.updatePayments();
+                        break;
+                }
+                UpdateDebitStatus();
+            }
         }
     }
 }

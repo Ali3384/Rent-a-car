@@ -12,7 +12,7 @@
     <Grid>
 
 
-        <TabControl TabStripPlacement="Left" Style="{DynamicResource MahApps.Styles.TabControl.AnimatedSingleRow}" Margin="0,78,0,531"  Grid.ColumnSpan="3">
+        <TabControl Name="MainTab" TabStripPlacement="Left" Style="{DynamicResource MahApps.Styles.TabControl.AnimatedSingleRow}" Margin="0,78,0,531"  Grid.ColumnSpan="3" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Name="arenda"  Header="Arenda" Margin="0,-3,-3,-1"  mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22">
 
                 <TabItem.Content>

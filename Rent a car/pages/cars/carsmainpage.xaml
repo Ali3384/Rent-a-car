@@ -11,7 +11,7 @@
 
     <Grid>
         <DataGrid x:Name="carsdatagrid" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="0,80,0,0" Background="White" FontFamily="Times New Roman" LoadingRow="carsdatagrid_LoadingRow" GridLinesVisibility="Horizontal"/>
-        <Button x:Name="deletecar" Content="Avtomobilni o'chirish" HorizontalAlignment="Left" Margin="636,22,0,0" VerticalAlignment="Top" Width="159" Background="LightBlue" Height="38" FontFamily="Orbitron"/>
+        <Button x:Name="deletecar" Content="Avtomobilni o'chirish" HorizontalAlignment="Left" Margin="636,22,0,0" VerticalAlignment="Top" Width="159" Background="LightBlue" Height="38" FontFamily="Orbitron" Click="deletecar_Click"/>
         <Button x:Name="addcar" Content="Yangi Avtomobil" HorizontalAlignment="Left" Margin="486,22,0,0" VerticalAlignment="Top" Width="143" Background="LightBlue" FontFamily="Orbitron" Height="38" Click="addcar_Click" />
         <TextBox x:Name="carsfilter" HorizontalAlignment="Left" Margin="73,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" FontFamily="Orbitron" TextChanged="carsfilter_TextChanged"/>
         <Label Content="Qidiruv:" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>

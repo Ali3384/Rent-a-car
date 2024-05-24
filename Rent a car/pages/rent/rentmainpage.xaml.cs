@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using Rent_a_car.pages.clients;
+using Rent_a_car.pages.other_pages;
 namespace Rent_a_car.pages.rent
 {
     /// <summary>
@@ -106,6 +108,87 @@ namespace Rent_a_car.pages.rent
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             updateRent();
+        }
+
+        private void deleterent_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Tanlangan arendani o'chirishni hohlamoqchimisiz ? ",
+                   "Savol",
+                   MessageBoxButton.YesNo,
+                   MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                if (rentdatagrid.SelectedItem != null)
+                {
+
+                    // Cast the selected item to a DataRowView to access its columns
+                    var selectedItem = rentdatagrid.SelectedItem as DataRowView;
+
+                    if (selectedItem != null)
+                    {
+                        // Get the value of the "Numer Vin" column
+                        string numerVin = selectedItem["ID"].ToString();
+                        string plateno = selectedItem["Avto raqami"].ToString();
+                        string clientName = selectedItem["Mijoz Ismi"].ToString();
+                        try
+                        {
+                            MySqlConnection connection = new MySqlConnection(connectionString);
+                            connection.Open();
+
+                            string updateQuery = "UPDATE rentings SET Rent_Status = 'aktiv emas' WHERE Rent_ID = @id";
+                            using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, connection))
+                            {
+                                updateCmd.Parameters.AddWithValue("@id", numerVin);
+                                updateCmd.ExecuteNonQuery();
+                            }
+
+                            string updateQuery2 = "UPDATE rentperiods SET Rent_Status = 'aktiv emas' WHERE Client_Name = @name AND Car_Plate_No = @plateno";
+                            using (MySqlCommand updateCmd2 = new MySqlCommand(updateQuery2, connection))
+                            {
+                                updateCmd2.Parameters.AddWithValue("@name", clientName);
+                                updateCmd2.Parameters.AddWithValue("@plateno", plateno);
+                                updateCmd2.ExecuteNonQuery();
+                            }
+                            string updateQuery3 = "UPDATE cars SET Car_Status = 'Olinmagan' WHERE Cars_No = @plate";
+                            using (MySqlCommand updateCmd3 = new MySqlCommand(updateQuery3, connection))
+                            {
+                                updateCmd3.Parameters.AddWithValue("@plateno", plateno);
+                                updateCmd3.ExecuteNonQuery();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error while updating status of rentperiod");
+                        }
+
+                    }
+                    updateRent();
+                }
+            }
+        }
+
+        private void rentdatagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (rentdatagrid.SelectedItem != null)
+            {
+
+                // Cast the selected item to a DataRowView to access its columns
+                var selectedItem = rentdatagrid.SelectedItem as DataRowView;
+
+                if (selectedItem != null)
+                {
+                    // Get the value of the "Numer Vin" column
+                    Properties.Settings.Default.RentCarPlate = selectedItem["Avto raqami"].ToString();
+                    Properties.Settings.Default.RentClientName = selectedItem["Mijoz Ismi"].ToString();
+
+                    Properties.Settings.Default.Save();
+                    periodmainwindow periodmainwindow = new periodmainwindow();
+                    periodmainwindow.ShowDialog();
+
+                    clientsmainpage clientsmainpage = new clientsmainpage();
+                    clientsmainpage.updateClient();
+                }
+                
+            }
         }
     }
 }

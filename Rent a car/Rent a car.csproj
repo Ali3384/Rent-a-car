@@ -252,6 +252,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="pages\other_pages\addpaymentwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\other_pages\periodmainwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\payments\paymentsmainpage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -289,6 +297,12 @@
     </Compile>
     <Compile Include="pages\clients\clientsmainpage.xaml.cs">
       <DependentUpon>clientsmainpage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\other_pages\addpaymentwindow.xaml.cs">
+      <DependentUpon>addpaymentwindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\other_pages\periodmainwindow.xaml.cs">
+      <DependentUpon>periodmainwindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\payments\paymentsmainpage.xaml.cs">
       <DependentUpon>paymentsmainpage.xaml</DependentUpon>
@@ -345,7 +359,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="icons\" />
-    <Folder Include="pages\other_pages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

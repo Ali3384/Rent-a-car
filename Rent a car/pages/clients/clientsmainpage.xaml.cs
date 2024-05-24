@@ -123,5 +123,43 @@ namespace Rent_a_car.pages.clients
         {
             updateClient();
         }
+
+        private void deleteclient_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Tanlangan mijozni o'chirishni hohlamoqchimisiz ? ",
+                   "Savol",
+                   MessageBoxButton.YesNo,
+                   MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                if (clientsdatagrid.SelectedItem != null)
+                {
+                    // Cast the selected item to a DataRowView to access its columns
+                    var selectedItem = clientsdatagrid.SelectedItem as DataRowView;
+
+                    if (selectedItem != null)
+                    {
+                        // Get the value of the "Numer Vin" column
+                        string numerVin = selectedItem["Mijoz ID"].ToString();
+                        try
+                        {
+                            MySqlConnection connection = new MySqlConnection(connectionString);
+                            connection.Open();
+
+                            string updateQuery = "UPDATE clients SET Client_Status = 'aktiv emas' WHERE Client_ID = @id";
+                            using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, connection))
+                            {
+                                updateCmd.Parameters.AddWithValue("@id", numerVin);
+                                updateCmd.ExecuteNonQuery();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error while updating status of client");
+                        }
+                    }
+                    updateClient();
+                }
+            }
+        }
     }
 }

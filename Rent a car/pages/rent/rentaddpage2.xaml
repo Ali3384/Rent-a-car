@@ -23,5 +23,6 @@
             <ComboBoxItem Content="Yoqilg'i turi"/>
             <ComboBoxItem Content="Statusi"/>
         </ComboBox>
+        <Label Content="Avtomobilni tanlang:" HorizontalAlignment="Left" Margin="22,29,0,0" VerticalAlignment="Top" FontFamily="Orbitron SemiBold" FontSize="36"/>
     </Grid>
 </Page>

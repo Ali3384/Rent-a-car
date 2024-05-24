@@ -22,6 +22,7 @@
             <ComboBoxItem Content="Hujjat No"/>
             <ComboBoxItem Content="Telefon No"/>
         </ComboBox>
+        <Label Content="Mijozni tanlang:" HorizontalAlignment="Left" Margin="22,29,0,0" VerticalAlignment="Top" FontFamily="Orbitron SemiBold" FontSize="36"/>
 
 
     </Grid>

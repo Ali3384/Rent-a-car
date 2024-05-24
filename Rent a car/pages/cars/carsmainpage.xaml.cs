@@ -158,5 +158,43 @@ namespace Rent_a_car.pages.cars
         {
             updateCar();
         }
+
+        private void deletecar_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Tanlangan avtomobilni o'chirishni hohlamoqchimisiz ? ",
+                    "Savol",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                if (carsdatagrid.SelectedItem != null)
+                {
+                    // Cast the selected item to a DataRowView to access its columns
+                    var selectedItem = carsdatagrid.SelectedItem as DataRowView;
+
+                    if (selectedItem != null)
+                    {
+                        // Get the value of the "Numer Vin" column
+                        string numerVin = selectedItem["ID"].ToString();
+                        try
+                        {
+                            MySqlConnection connection = new MySqlConnection(connectionString);
+                            connection.Open();
+
+                            string updateQuery = "DELETE FROM Cars WHERE Cars_ID = @id";
+                            using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, connection))
+                            {
+                                updateCmd.Parameters.AddWithValue("@id", numerVin);
+                                updateCmd.ExecuteNonQuery();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error while updating status of car");
+                        }
+                    }
+                    updateCar();
+                }
+            }
+        }
     }
 }

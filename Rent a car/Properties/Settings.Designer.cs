@@ -83,5 +83,89 @@ namespace Rent_a_car.Properties {
                 this["SelectedCarPlate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RentClientName {
+            get {
+                return ((string)(this["RentClientName"]));
+            }
+            set {
+                this["RentClientName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RentCarPlate {
+            get {
+                return ((string)(this["RentCarPlate"]));
+            }
+            set {
+                this["RentCarPlate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PeriodClientName {
+            get {
+                return ((string)(this["PeriodClientName"]));
+            }
+            set {
+                this["PeriodClientName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PeriodCarPlate {
+            get {
+                return ((string)(this["PeriodCarPlate"]));
+            }
+            set {
+                this["PeriodCarPlate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PeriodDates {
+            get {
+                return ((string)(this["PeriodDates"]));
+            }
+            set {
+                this["PeriodDates"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PeriodID {
+            get {
+                return ((string)(this["PeriodID"]));
+            }
+            set {
+                this["PeriodID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PeriodClientID {
+            get {
+                return ((string)(this["PeriodClientID"]));
+            }
+            set {
+                this["PeriodClientID"] = value;
+            }
+        }
     }
 }

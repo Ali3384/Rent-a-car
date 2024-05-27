@@ -15,7 +15,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using Rent_a_car.pages.other_pages;
 namespace Rent_a_car.pages.clients
+
 {
     /// <summary>
     /// Логика взаимодействия для clientsmainpage.xaml
@@ -92,7 +94,7 @@ namespace Rent_a_car.pages.clients
             {
                 int debit = int.Parse(rowView["Mijoz Qarzi"].ToString());
                 
-                    if (debit < 0)
+                    if (debit > 400)
                     {
                         e.Row.Background = new SolidColorBrush(Colors.Red);
                     }
@@ -159,6 +161,30 @@ namespace Rent_a_car.pages.clients
                     }
                     updateClient();
                 }
+            }
+        }
+
+        private void clientsdatagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (clientsdatagrid.SelectedItem != null)
+            {
+
+                // Cast the selected item to a DataRowView to access its columns
+                var selectedItem = clientsdatagrid.SelectedItem as DataRowView;
+
+                if (selectedItem != null)
+                {
+                    Properties.Settings.Default.RentClientID = selectedItem["Mijoz ID"].ToString();
+                    Properties.Settings.Default.IsRentings = false;
+                    Properties.Settings.Default.FillQuery = "SELECT Period_ID,Client_Name,Car_Plate_No,Period_From,Period_Until,Period_Cost,Payment_Status, Client_ID FROM rentperiods WHERE Payment_Status = 'Tolanmagan' AND Client_ID = @clientid";
+
+                    Properties.Settings.Default.Save();
+                    periodmainwindow periodmainwindow = new periodmainwindow();
+                    periodmainwindow.ShowDialog();
+
+                    updateClient();
+                }
+
             }
         }
     }

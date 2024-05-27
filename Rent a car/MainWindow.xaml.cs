@@ -69,7 +69,7 @@ namespace Rent_a_car
 
         public void UpdateDatabase()
         {
-            string selectQuery = "SELECT *, STR_TO_DATE(Period_Until, '%Y-%m-%d') AS ConvertedDate, CURDATE() FROM rentperiods WHERE STR_TO_DATE(Period_From, '%Y-%m-%d') <= CURDATE() AND period_status != 'passed' AND Rent_Status = 'aktiv';"; 
+            string selectQuery = "SELECT *, STR_TO_DATE(Period_Until, '%Y-%m-%d') AS ConvertedDate, CURDATE() FROM rentperiods WHERE STR_TO_DATE(Period_From, '%Y-%m-%d') < CURDATE() AND period_status != 'passed' AND Rent_Status = 'aktiv';"; 
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {

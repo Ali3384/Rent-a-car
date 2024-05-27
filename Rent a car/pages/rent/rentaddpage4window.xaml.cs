@@ -45,12 +45,13 @@ namespace Rent_a_car.pages.rent
                 {
                     connection = new MySqlConnection(connectionString);
                     connection.Open();
-                    string insertQuery = "INSERT INTO rentings (Rent_Car_Plate_No, Rent_Client_Name, Rent_Client_Surname, Rent_Cost, Rent_From, Rent_Status) VALUES (@plate, @name, @surname, @cost, @from, 'aktiv')";
+                    string insertQuery = "INSERT INTO rentings (Rent_Car_Plate_No, Rent_Client_Name, Rent_Client_Surname, Client_ID, Rent_Cost, Rent_From, Rent_Status) VALUES (@plate, @name, @surname, @clientid, @cost, @from, 'aktiv')";
                     using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                     {
                         insertCmd.Parameters.AddWithValue("@plate", Properties.Settings.Default.SelectedCarPlate);
                         insertCmd.Parameters.AddWithValue("@name", Properties.Settings.Default.SelectedClientName);
-                        insertCmd.Parameters.AddWithValue("@surname", Properties.Settings.Default.SelectedClientSurname);                        
+                        insertCmd.Parameters.AddWithValue("@surname", Properties.Settings.Default.SelectedClientSurname);
+                        insertCmd.Parameters.AddWithValue("@clientid", Properties.Settings.Default.SelectedClientID);
                         insertCmd.Parameters.AddWithValue("@cost", int.Parse(costtxt.Text));
                         insertCmd.Parameters.AddWithValue("@from", datefrompicker.SelectedDate.Value.ToString("yyyy-MM-dd"));
                         insertCmd.ExecuteNonQuery();

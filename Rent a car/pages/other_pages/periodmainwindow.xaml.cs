@@ -23,6 +23,7 @@ namespace Rent_a_car.pages.other_pages
     {
         string connectionString = Properties.Settings.Default.ConnectionString;
         DataTable periods = new DataTable();
+        string query = "";
         public periodmainwindow()
         {
             InitializeComponent();
@@ -35,12 +36,19 @@ namespace Rent_a_car.pages.other_pages
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT Period_ID,Client_Name,Car_Plate_No,Period_From,Period_Until,Period_Cost,Payment_Status, Client_ID FROM rentperiods WHERE Rent_Status = 'aktiv' AND Client_Name = @clientname AND Car_Plate_No = @plateno";
+                    query = Properties.Settings.Default.FillQuery;
                     
                     MySqlCommand command = new MySqlCommand(query, connection);
-                   
-                    command.Parameters.AddWithValue("@clientname", Properties.Settings.Default.RentClientName);
-                    command.Parameters.AddWithValue("@plateno", Properties.Settings.Default.RentCarPlate);
+                    if (Properties.Settings.Default.IsRentings)
+                    {
+                        command.Parameters.AddWithValue("@clientname", Properties.Settings.Default.RentClientName);
+                        command.Parameters.AddWithValue("@plateno", Properties.Settings.Default.RentCarPlate);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@clientid", Properties.Settings.Default.RentClientID);
+                    }
+                    
                     MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                     adapter.Fill(periods);
                     periods.Columns["Period_ID"].ColumnName = "ID";

@@ -167,5 +167,63 @@ namespace Rent_a_car.Properties {
                 this["PeriodClientID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Color BackroundFirst {
+            get {
+                return ((global::System.Drawing.Color)(this["BackroundFirst"]));
+            }
+            set {
+                this["BackroundFirst"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Color BackroundSecond {
+            get {
+                return ((global::System.Drawing.Color)(this["BackroundSecond"]));
+            }
+            set {
+                this["BackroundSecond"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FillQuery {
+            get {
+                return ((string)(this["FillQuery"]));
+            }
+            set {
+                this["FillQuery"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsRentings {
+            get {
+                return ((bool)(this["IsRentings"]));
+            }
+            set {
+                this["IsRentings"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RentClientID {
+            get {
+                return ((string)(this["RentClientID"]));
+            }
+            set {
+                this["RentClientID"] = value;
+            }
+        }
     }
 }

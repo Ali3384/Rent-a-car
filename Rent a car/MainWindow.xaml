@@ -16,7 +16,7 @@
             <TabItem Name="arenda"  Header="Arenda" Margin="0,-3,-3,-1"  mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22">
 
                 <TabItem.Content>
-                    <Frame Name="rentframe" Background="DarkGray" Margin="26,-80,-3,-533">
+                    <Frame Name="rentframe" Background="DarkGray" Margin="26,-80,10,-533">
 
                     </Frame>
                 </TabItem.Content>
@@ -24,21 +24,21 @@
 
             <TabItem Name="avtomobillar" Header="Avtomobillar" Margin="0,1,-3,-4" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22">
                 <TabItem.Content>
-                    <Frame Name="carsframe" Background="DarkGray" Margin="26,-80,-3,-533">
+                    <Frame Name="carsframe" Background="DarkGray" Margin="26,-80,10,-533">
 
                     </Frame>
                 </TabItem.Content>
             </TabItem>
             <TabItem Name="klientlar" Header="Mijozlar" Margin="0,4,-3,-7" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22" Loaded="klientlar_Loaded">
                 <TabItem.Content>
-                    <Frame Name="clientsframe" Background="DarkGray" Margin="26,-80,-3,-533">
+                    <Frame Name="clientsframe" Background="DarkGray" Margin="26,-80,10,-533">
 
                     </Frame>
                 </TabItem.Content>
             </TabItem>
             <TabItem Name="tolovlar" Header="To'lovlar" Margin="0,8,-3,-10" mah:HeaderedControlHelper.HeaderFontFamily="Orbitron ExtraBold" mah:HeaderedControlHelper.HeaderFontSize="22">
                 <TabItem.Content>
-                    <Frame Name="paymentsframe" Background="DarkGray" Margin="26,-80,-3,-533">
+                    <Frame Name="paymentsframe" Background="DarkGray" Margin="26,-80,10,-533">
 
                     </Frame>
                 </TabItem.Content>

@@ -95,8 +95,6 @@ namespace Rent_a_car.pages.cars
                 if (rowView != null)
                 {
                     string insurancedateStr = rowView["Sug'urta"].ToString();
-                    string lpgdateStr = rowView["LPG"].ToString();
-                    string servicedateStr = rowView["Texnik ko'rik"].ToString();
 
                     if (DateTime.TryParse(insurancedateStr, out DateTime date))
                     {
@@ -105,22 +103,7 @@ namespace Rent_a_car.pages.cars
 
                         e.Row.Background = new SolidColorBrush(Color.FromRgb(255, 127, 127));
 
-                    }
-                    }
-                    
-                    if (DateTime.TryParse(lpgdateStr, out DateTime date1))
-                    {
-                        if ((date1 - DateTime.Now).TotalDays < 30)
-                        {
-                        e.Row.Background = new SolidColorBrush(Color.FromRgb(255, 127, 127));
-                    }
-                    }
-                    if (DateTime.TryParse(servicedateStr, out DateTime date2))
-                    {
-                        if ((date2 - DateTime.Now).TotalDays < 30)
-                        {
-                        e.Row.Background = new SolidColorBrush(Color.FromRgb(255, 127, 127));
-                    }
+                        }
                     }
                 }
         }

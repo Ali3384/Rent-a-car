@@ -39,7 +39,7 @@ namespace Rent_a_car.pages.rent
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT Rent_ID,Rent_Client_Name,Rent_Client_Surname,Rent_Car_Plate_No,Rent_From,Rent_Cost FROM rentings WHERE Rent_Status = 'aktiv'";
+                    string query = "SELECT Rent_ID,Rent_Client_Name,Rent_Client_Surname,Client_ID, Rent_Car_Plate_No,Rent_From,Rent_Cost FROM rentings WHERE Rent_Status = 'aktiv'";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(command);
 
@@ -47,6 +47,7 @@ namespace Rent_a_car.pages.rent
                     rents.Columns["Rent_ID"].ColumnName = "ID";
                     rents.Columns["Rent_Client_Name"].ColumnName = "Mijoz Ismi";
                     rents.Columns["Rent_Client_Surname"].ColumnName = "Mijoz Familiyasi";
+                    rents.Columns["Client_ID"].ColumnName = "Mijoz ID";
                     rents.Columns["Rent_Car_Plate_No"].ColumnName = "Avto raqami";
                     rents.Columns["Rent_From"].ColumnName = "Qachondan";
                     rents.Columns["Rent_Cost"].ColumnName = "Arenda narxi";
@@ -98,6 +99,7 @@ namespace Rent_a_car.pages.rent
             rents.Columns["ID"].ColumnName = "Rent_ID";
             rents.Columns["Mijoz Ismi"].ColumnName = "Rent_Client_Name";
             rents.Columns["Mijoz Familiyasi"].ColumnName = "Rent_Client_Surname";
+            rents.Columns["Mijoz ID"].ColumnName = "Client_ID"; 
             rents.Columns["Avto raqami"].ColumnName = "Rent_Car_Plate_No";
             rents.Columns["Qachondan"].ColumnName = "Rent_From";
             rents.Columns["Arenda narxi"].ColumnName = "Rent_Cost";
@@ -179,6 +181,8 @@ namespace Rent_a_car.pages.rent
                     // Get the value of the "Numer Vin" column
                     Properties.Settings.Default.RentCarPlate = selectedItem["Avto raqami"].ToString();
                     Properties.Settings.Default.RentClientName = selectedItem["Mijoz Ismi"].ToString();
+                    Properties.Settings.Default.IsRentings = true;
+                    Properties.Settings.Default.FillQuery = "SELECT Period_ID,Client_Name,Car_Plate_No,Period_From,Period_Until,Period_Cost,Payment_Status, Client_ID FROM rentperiods WHERE Rent_Status = 'aktiv' AND Client_Name = @clientname AND Car_Plate_No = @plateno";
 
                     Properties.Settings.Default.Save();
                     periodmainwindow periodmainwindow = new periodmainwindow();

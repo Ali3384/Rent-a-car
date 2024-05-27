@@ -163,7 +163,7 @@ namespace Rent_a_car.pages.cars
                             MySqlConnection connection = new MySqlConnection(connectionString);
                             connection.Open();
 
-                            string updateQuery = "DELETE FROM Cars WHERE Cars_ID = @id";
+                            string updateQuery = "DELETE FROM cars WHERE Cars_ID = @id";
                             using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, connection))
                             {
                                 updateCmd.Parameters.AddWithValue("@id", numerVin);
@@ -172,7 +172,7 @@ namespace Rent_a_car.pages.cars
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Error while updating status of car");
+                            MessageBox.Show("Error while delete car");
                         }
                     }
                     updateCar();

@@ -15,7 +15,8 @@ namespace Rent_a_car
     {
         string connectionString = Properties.Settings.Default.ConnectionString;
         double debitstatus;
-
+        int freecars;
+        int rentedcars;
 
         public MainWindow()
         {
@@ -59,12 +60,28 @@ namespace Rent_a_car
                     object result = command.ExecuteScalar();
                     debitstatus = result != DBNull.Value ? Convert.ToDouble(result) : 0.0;
                 }
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand("SELECT COUNT(Cars_ID) FROM cars WHERE Cars_Status = 'Arendada'", connection);
+                    object result = command.ExecuteScalar();
+                    rentedcars = result != DBNull.Value ? Convert.ToInt32(result) : 0;
+                }
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand("SELECT COUNT(Cars_ID) FROM cars WHERE Cars_Status = 'olinmagan'", connection);
+                    object result = command.ExecuteScalar();
+                    freecars = result != DBNull.Value ? Convert.ToInt32(result) : 0;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error while updating debit status: " + ex.Message);
             }
             qarzlar.Content = debitstatus.ToString() + " zl";
+            carsfree.Content = freecars.ToString();
+            carsrented.Content = rentedcars.ToString();
         }
 
         public void UpdateDatabase()

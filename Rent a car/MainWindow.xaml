@@ -46,7 +46,7 @@
         </TabControl>
 
         <Label Name="logo" Content="Rent A Car" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24"/>
-        <Label Content="Qarzlar:" HorizontalAlignment="Left" Foreground="ForestGreen" Margin="10,470,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24"/>
+        <Label Content="Qarzlar:" HorizontalAlignment="Left" Foreground="DarkKhaki" Margin="10,470,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24"/>
         <Label Content="______________" HorizontalAlignment="Left" Margin="15,25,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24" Foreground="#FFFF0202" Grid.ColumnSpan="2"/>
         <Label Content="_________________________________________________________________________________" HorizontalAlignment="Left" Margin="-182,358,0,0" VerticalAlignment="Top" Height="62" Width="762" FontFamily="Times New Roman" FontSize="36" Foreground="DarkKhaki" RenderTransformOrigin="0.5,0.5" FontWeight="Bold">
             <Label.RenderTransform>
@@ -64,6 +64,14 @@
             <iconPacks:Modern Kind="Refresh"/>
         </Button>
         <Label Content="Yangilash" HorizontalAlignment="Left" Margin="53,374,0,0" VerticalAlignment="Top" Height="47" Width="108" FontFamily="Orbitron" FontSize="18"/>
+        <Label Content="Bo'sh avtomobillar:" HorizontalAlignment="Left" Foreground="DarkKhaki" Margin="2,568,0,0" VerticalAlignment="Top" Height="47" Width="186" FontFamily="Orbitron Black" FontSize="16"/>
+        <Label x:Name="carsfree" Content="" HorizontalAlignment="Left" Foreground="ForestGreen" Margin="10,608,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24"/>
+        <Label Content="Band avtomobillar:" HorizontalAlignment="Left" Foreground="DarkKhaki" Margin="2,666,0,0" VerticalAlignment="Top" Height="47" Width="186" FontFamily="Orbitron Black" FontSize="16"/>
+        <Label x:Name="carsrented" Content="" HorizontalAlignment="Left" Foreground="OrangeRed" Margin="10,706,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24"/>
+        <Label Content="______________" HorizontalAlignment="Left" Margin="15,535,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24" Foreground="#FFFF0202"/>
+        <Label Content="______________" HorizontalAlignment="Left" Margin="15,635,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24" Foreground="#FFFF0202"/>
+        <Label Content="______________" HorizontalAlignment="Left" Margin="15,435,0,0" VerticalAlignment="Top" Height="47" Width="178" FontFamily="Orbitron ExtraBold" FontSize="24" Foreground="#FFFF0202"/>
+
 
 
     </Grid>

@@ -7,18 +7,18 @@
         mc:Ignorable="d"
          xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="Yangi Mijoz" Height="341" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"  Icon="/sedan.png">
+        Title="Nowy Klient" Height="341" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"  Icon="/sedan.png">
     <Grid>
-        <Label Content="Ismi:" HorizontalAlignment="Left" Margin="26,20,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
+        <Label Content="Imie:" HorizontalAlignment="Left" Margin="26,20,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
         <TextBox x:Name="nametxtbox" HorizontalAlignment="Left" Margin="163,20,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" MaxLength="40"/>
-        <Label  Content="Familiyasi:" HorizontalAlignment="Left" Margin="26,60,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
+        <Label  Content="Nazwisko:" HorizontalAlignment="Left" Margin="26,60,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
         <TextBox x:Name="surnametxt" HorizontalAlignment="Left" Margin="163,60,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" MaxLength="40"/>
-        <Label  Content="Hujjat No:" HorizontalAlignment="Left" Margin="26,100,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
+        <Label  Content="Dowód Nr:" HorizontalAlignment="Left" Margin="26,100,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
         <TextBox x:Name ="Documentnotxt" HorizontalAlignment="Left" Margin="163,100,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" MaxLength="40"/>
-        <Label  Content="Telefon No:" HorizontalAlignment="Left" Margin="26,140,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
+        <Label  Content="Telefon Nr:" HorizontalAlignment="Left" Margin="26,140,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
         <TextBox x:Name="Telnotxt"  HorizontalAlignment="Left" Margin="163,140,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" MaxLength="40"/>
-        <Label  Content="Qarzi:" HorizontalAlignment="Left" Margin="29,181,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
+        <Label  Content="Dług:" HorizontalAlignment="Left" Margin="29,181,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
         <TextBox x:Name="Debittxt" Text="0" PreviewTextInput="Debittxt_PreviewTextInput" HorizontalAlignment="Left" Margin="163,181,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" Height="26" MaxLength="40"/>
-        <Button Name="clientaddbtn" Content="Saqlash" HorizontalAlignment="Center" Margin="0,255,0,0" VerticalAlignment="Top" Width="102" Background="CornflowerBlue" FontFamily="Orbitron" Click="clientaddbtn_Click"/>
+        <Button Name="clientaddbtn" Content="Zapisać" HorizontalAlignment="Center" Margin="0,255,0,0" VerticalAlignment="Top" Width="102" Background="CornflowerBlue" FontFamily="Orbitron" Click="clientaddbtn_Click"/>
     </Grid>
 </mah:MetroWindow>

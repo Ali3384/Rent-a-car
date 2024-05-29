@@ -37,22 +37,22 @@ namespace Rent_a_car.pages.rent
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT Cars_ID,Cars_Brand,Cars_Model,Cars_Year,Cars_Vin,Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance, Cars_ServiceDate, Cars_LPG_Date FROM cars WHERE Cars_Status != 'Arendada'";
+                    string query = "SELECT Cars_ID,Cars_Brand,Cars_Model,Cars_Year,Cars_Vin,Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance, Cars_ServiceDate, Cars_LPG_Date FROM cars WHERE Cars_Status != 'Wynajęte'";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(command);
 
                     adapter.Fill(cars);
                     cars.Columns["Cars_ID"].ColumnName = "ID";
-                    cars.Columns["Cars_Brand"].ColumnName = "Markasi";
-                    cars.Columns["Cars_Model"].ColumnName = "Modeli";
-                    cars.Columns["Cars_Year"].ColumnName = "Yili";
+                    cars.Columns["Cars_Brand"].ColumnName = "Marka pojazdu";
+                    cars.Columns["Cars_Model"].ColumnName = "Model pojazdu";
+                    cars.Columns["Cars_Year"].ColumnName = "Rok produkcji";
                     cars.Columns["Cars_Vin"].ColumnName = "Vin No";
-                    cars.Columns["Cars_No"].ColumnName = "Raqami";
-                    cars.Columns["Cars_Fuel"].ColumnName = "Yoqilg'i turi";
-                    cars.Columns["Cars_Status"].ColumnName = "Statusi";
-                    cars.Columns["Cars_Insurance"].ColumnName = "Sug'urta";
-                    cars.Columns["Cars_ServiceDate"].ColumnName = "Texnik ko'rik";
-                    cars.Columns["Cars_LPG_Date"].ColumnName = "LPG";
+                    cars.Columns["Cars_No"].ColumnName = "Numer rejestracyjny";
+                    cars.Columns["Cars_Fuel"].ColumnName = "Rodzaj paliwa";
+                    cars.Columns["Cars_Status"].ColumnName = "Status";
+                    cars.Columns["Cars_Insurance"].ColumnName = "Ubezpieczenia";
+                    cars.Columns["Cars_ServiceDate"].ColumnName = "Przegląd";
+                    cars.Columns["Cars_LPG_Date"].ColumnName = "Ważność butli LPG";
                     carsdatagrid.ItemsSource = cars.DefaultView;
                 }
             }
@@ -96,7 +96,7 @@ namespace Rent_a_car.pages.rent
                 foreach (DataRowView row in carsdatagrid.SelectedItems)
                 {
                     System.Data.DataRow myRow = row.Row;
-                    Properties.Settings.Default.SelectedCarPlate = myRow["Raqami"].ToString();
+                    Properties.Settings.Default.SelectedCarPlate = myRow["Numer rejestracyjny"].ToString();
                     Properties.Settings.Default.Save();
                 }
                rentaddpage4window rentaddpage4Window = new rentaddpage4window();

@@ -11,19 +11,19 @@
 
     <Grid>
         <DataGrid x:Name="rentdatagrid" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="0,80,0,0" Background="White" FontFamily="Times New Roman" GridLinesVisibility="Horizontal" MouseDoubleClick="rentdatagrid_MouseDoubleClick" HorizontalGridLinesBrush="Blue" VerticalGridLinesBrush="Blue"/>
-        <Button x:Name="deleterent" Content="Arendani o'chirish" HorizontalAlignment="Left" Margin="636,22,0,0" VerticalAlignment="Top" Width="159" Background="LightBlue" Height="38" FontFamily="Orbitron" Click="deleterent_Click"/>
-        <Button x:Name="addrent" Content="Yangi arenda" HorizontalAlignment="Left" Margin="486,22,0,0" VerticalAlignment="Top" Width="143" Background="LightBlue" FontFamily="Orbitron" Height="38" Click="addrent_Click" />
+        <Button x:Name="deleterent" Content="Usun wynajem" HorizontalAlignment="Left" Margin="664,22,0,0" VerticalAlignment="Top" Width="159" Background="LightBlue" Height="38" FontFamily="Orbitron" Click="deleterent_Click"/>
+        <Button x:Name="addrent" Content="Nowy wynajem" HorizontalAlignment="Left" Margin="514,22,0,0" VerticalAlignment="Top" Width="143" Background="LightBlue" FontFamily="Orbitron" Height="38" Click="addrent_Click" />
         <TextBox x:Name="rentfilter" HorizontalAlignment="Left" Margin="73,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" FontFamily="Orbitron" TextChanged="rentfilter_TextChanged"/>
-        <Label Content="Qidiruv:" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>
-        <Label Content="Qidiruv turi:" HorizontalAlignment="Left" Margin="246,27,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>
-        <ComboBox x:Name="rentcombobox" HorizontalAlignment="Left" Margin="337,28,0,0" VerticalAlignment="Top" Width="120" FontFamily="Orbitron" SelectionChanged="rentcombobox_SelectionChanged" FontSize="10">
-            <ComboBoxItem Content="Mijoz Ismi"/>
-            <ComboBoxItem Content="Mijoz Familiyasi"/>
-            <ComboBoxItem Content="Avto raqami"/>
+        <Label Content="Szukaj:" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>
+        <Label Content="Szukaj według:" HorizontalAlignment="Left" Margin="246,27,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>
+        <ComboBox x:Name="rentcombobox" HorizontalAlignment="Left" Margin="365,28,0,0" VerticalAlignment="Top" Width="120" FontFamily="Orbitron" SelectionChanged="rentcombobox_SelectionChanged" FontSize="10">
+            <ComboBoxItem Content="Imie Klienta"/>
+            <ComboBoxItem Content="Nazwisko Klienta"/>
+            <ComboBoxItem Content="Numer rejestracyjny"/>
         </ComboBox>
 
-        <Button Style="{DynamicResource MahApps.Styles.Button.Circle}" HorizontalAlignment="Left" Margin="824,24,0,0" VerticalAlignment="Top" Width="33" Height="33" Click="Button_Click" Content="{iconPacks:Modern Refresh}"/>
-        <Label Content="Yangilash" HorizontalAlignment="Left" Margin="862,24,0,0" VerticalAlignment="Top" Height="47" Width="108" FontFamily="Orbitron" FontSize="18"/>
+        <Button Style="{DynamicResource MahApps.Styles.Button.Circle}" HorizontalAlignment="Left" Margin="852,24,0,0" VerticalAlignment="Top" Width="33" Height="33" Click="Button_Click" Content="{iconPacks:Modern Refresh}"/>
+        <Label Content="Odśwież" HorizontalAlignment="Left" Margin="890,24,0,0" VerticalAlignment="Top" Height="47" Width="108" FontFamily="Univers" FontSize="18" FontWeight="Bold"/>
 
     </Grid>
 </Page>

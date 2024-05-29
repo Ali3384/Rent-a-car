@@ -76,7 +76,7 @@ namespace Rent_a_car.pages.clients
                 {
                     connection = new MySqlConnection(connectionString);
                     connection.Open();
-                    string insertQuery = "INSERT INTO clients (Client_Name, Client_Surname, Client_Document_No, Client_Tel, Client_Debit, Client_Status) VALUES (@name, @surname, @documentno, @telno, @debit, 'aktiv')";
+                    string insertQuery = "INSERT INTO clients (Client_Name, Client_Surname, Client_Document_No, Client_Tel, Client_Debit, Client_Status) VALUES (@name, @surname, @documentno, @telno, @debit, 'aktywny')";
                     using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                     {
                         insertCmd.Parameters.AddWithValue("@name", name);
@@ -96,7 +96,7 @@ namespace Rent_a_car.pages.clients
             }
             else
             {
-                MessageBox.Show("Iltimos barcha ma'lumot kiriting.", "Xato", MessageBoxButton.OK);
+                MessageBox.Show("Proszę wypełnić wszystkie pola.", "Błąd", MessageBoxButton.OK);
             }
         }
     }

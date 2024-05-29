@@ -13,19 +13,18 @@
     <Grid>
         <DataGrid x:Name="paymentsdatagrid" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="0,80,0,0" Background="White" FontFamily="Times New Roman" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="Blue" VerticalGridLinesBrush="Blue"/>
         <TextBox x:Name="paymentsfilter" HorizontalAlignment="Left" Margin="73,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" FontFamily="Orbitron" TextChanged="carsfilter_TextChanged"/>
-        <Label Content="Qidiruv:" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>
-        <Label Content="Qidiruv turi:" HorizontalAlignment="Left" Margin="246,27,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>
-        <ComboBox x:Name="paymentscombobox" HorizontalAlignment="Left" Margin="337,28,0,0" VerticalAlignment="Top" Width="120" FontFamily="Orbitron" SelectionChanged="paymentscombobox_SelectionChanged" FontSize="10">
+        <Label Content="Szukaj:" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>
+        <Label Content="Szukaj według:" HorizontalAlignment="Left" Margin="246,27,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>
+        <ComboBox x:Name="paymentscombobox" HorizontalAlignment="Left" Margin="379,28,0,0" VerticalAlignment="Top" Width="120" FontFamily="Orbitron" SelectionChanged="paymentscombobox_SelectionChanged" FontSize="10">
             <ComboBoxItem Content="ID"/>
-            <ComboBoxItem Content="To'lov sanasi"/>
-            <ComboBoxItem Content="Mijoz Ismi"/>
-            <ComboBoxItem Content="Avto raqami"/>
-            <ComboBoxItem Content="To'lov miqdori"/>
-            <ComboBoxItem Content="To'lov turi"/>
-            <ComboBoxItem Content="Statusi"/>
+            <ComboBoxItem Content="Data Opłaty"/>
+            <ComboBoxItem Content="Imie Klienta"/>
+            <ComboBoxItem Content="Nr Pojazdu"/>
+            <ComboBoxItem Content="Suma Opłaty"/>
+            <ComboBoxItem Content="Typ Opłaty"/>
         </ComboBox>
         <Button Style="{DynamicResource MahApps.Styles.Button.Circle}" HorizontalAlignment="Left" Margin="824,24,0,0" VerticalAlignment="Top" Width="33" Height="33" Click="Button_Click" Content="{iconPacks:Modern Refresh}"/>
-        <Label Content="Yangilash" HorizontalAlignment="Left" Margin="862,24,0,0" VerticalAlignment="Top" Height="47" Width="108" FontFamily="Orbitron" FontSize="18"/>
-        <Button x:Name="deletepayment" Content="To'lovni o'chirish" HorizontalAlignment="Left" Margin="636,22,0,0" VerticalAlignment="Top" Width="131" Background="LightBlue" Height="38" FontFamily="Orbitron" Click="deletepayment_Click" />
+        <Label Content="Odśwież" HorizontalAlignment="Left" Margin="862,24,0,0" VerticalAlignment="Top" Height="47" Width="108" FontFamily="Univers" FontSize="18" FontWeight="Bold"/>
+        <Button x:Name="deletepayment" Content="Usuń" HorizontalAlignment="Left" Margin="636,22,0,0" VerticalAlignment="Top" Width="131" Background="LightBlue" Height="38" FontFamily="Orbitron" Click="deletepayment_Click" />
     </Grid>
 </Page>

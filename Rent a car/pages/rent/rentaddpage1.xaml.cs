@@ -38,17 +38,17 @@ namespace Rent_a_car.pages.rent
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT Client_ID,Client_Name,Client_Surname,Client_Document_No,Client_Tel,Client_Debit FROM clients WHERE Client_Status = 'aktiv'";
+                    string query = "SELECT Client_ID,Client_Name,Client_Surname,Client_Document_No,Client_Tel,Client_Debit FROM clients WHERE Client_Status = 'aktywny'";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(command);
 
                     adapter.Fill(clients);
-                    clients.Columns["Client_ID"].ColumnName = "Mijoz ID";
-                    clients.Columns["Client_Name"].ColumnName = "Ismi";
-                    clients.Columns["Client_Surname"].ColumnName = "Familiyasi";
-                    clients.Columns["Client_Document_No"].ColumnName = "Hujjat No";
+                    clients.Columns["Client_ID"].ColumnName = "ID";
+                    clients.Columns["Client_Name"].ColumnName = "Imie";
+                    clients.Columns["Client_Surname"].ColumnName = "Nazwisko";
+                    clients.Columns["Client_Document_No"].ColumnName = "Dowód No";
                     clients.Columns["Client_Tel"].ColumnName = "Telefon No";
-                    clients.Columns["Client_Debit"].ColumnName = "Mijoz qarzi";
+                    clients.Columns["Client_Debit"].ColumnName = "Dług klienta";
                     clientsdatagrid.ItemsSource = clients.DefaultView;
                 }
             }
@@ -94,9 +94,9 @@ namespace Rent_a_car.pages.rent
                 foreach(DataRowView row in  clientsdatagrid.SelectedItems)
                 {
                     System.Data.DataRow myRow = row.Row;
-                    Properties.Settings.Default.SelectedClientName = myRow["Ismi"].ToString();
-                    Properties.Settings.Default.SelectedClientSurname = myRow["Familiyasi"].ToString();
-                    Properties.Settings.Default.SelectedClientID = myRow["Mijoz ID"].ToString();
+                    Properties.Settings.Default.SelectedClientName = myRow["Imie"].ToString();
+                    Properties.Settings.Default.SelectedClientSurname = myRow["Nazwisko"].ToString();
+                    Properties.Settings.Default.SelectedClientID = myRow["ID"].ToString();
                     Properties.Settings.Default.Save();
                 }
                 NavigationService.Navigate(new rentaddpage2());

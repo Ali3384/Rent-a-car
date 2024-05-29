@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
 using Rent_a_car.pages.clients;
 using Rent_a_car.pages.other_pages;
 namespace Rent_a_car.pages.rent
@@ -39,18 +40,18 @@ namespace Rent_a_car.pages.rent
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT Rent_ID,Rent_Client_Name,Rent_Client_Surname,Client_ID, Rent_Car_Plate_No,Rent_From,Rent_Cost FROM rentings WHERE Rent_Status = 'aktiv'";
+                    string query = "SELECT Rent_ID,Rent_Client_Name,Rent_Client_Surname,Client_ID, Rent_Car_Plate_No,Rent_From,Rent_Cost FROM rentings WHERE Rent_Status = 'aktywny'";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(command);
 
                     adapter.Fill(rents);
                     rents.Columns["Rent_ID"].ColumnName = "ID";
-                    rents.Columns["Rent_Client_Name"].ColumnName = "Mijoz Ismi";
-                    rents.Columns["Rent_Client_Surname"].ColumnName = "Mijoz Familiyasi";
-                    rents.Columns["Client_ID"].ColumnName = "Mijoz ID";
-                    rents.Columns["Rent_Car_Plate_No"].ColumnName = "Avto raqami";
-                    rents.Columns["Rent_From"].ColumnName = "Qachondan";
-                    rents.Columns["Rent_Cost"].ColumnName = "Arenda narxi";
+                    rents.Columns["Rent_Client_Name"].ColumnName = "Imie Klienta";
+                    rents.Columns["Rent_Client_Surname"].ColumnName = "Nazwisko Klienta";
+                    rents.Columns["Client_ID"].ColumnName = "Klient ID";
+                    rents.Columns["Rent_Car_Plate_No"].ColumnName = "Numer rejestracyjny";
+                    rents.Columns["Rent_From"].ColumnName = "Od kiedy";
+                    rents.Columns["Rent_Cost"].ColumnName = "Koszt wynajmu";
                     rentdatagrid.ItemsSource = rents.DefaultView;
                 }
             }
@@ -95,14 +96,17 @@ namespace Rent_a_car.pages.rent
         }
         public void updateRent()
         {
+
+           
+
             rents.Clear();
             rents.Columns["ID"].ColumnName = "Rent_ID";
-            rents.Columns["Mijoz Ismi"].ColumnName = "Rent_Client_Name";
-            rents.Columns["Mijoz Familiyasi"].ColumnName = "Rent_Client_Surname";
-            rents.Columns["Mijoz ID"].ColumnName = "Client_ID"; 
-            rents.Columns["Avto raqami"].ColumnName = "Rent_Car_Plate_No";
-            rents.Columns["Qachondan"].ColumnName = "Rent_From";
-            rents.Columns["Arenda narxi"].ColumnName = "Rent_Cost";
+            rents.Columns["Imie Klienta"].ColumnName = "Rent_Client_Name";
+            rents.Columns["Nazwisko Klienta"].ColumnName = "Rent_Client_Surname";
+            rents.Columns["Klient ID"].ColumnName = "Client_ID"; 
+            rents.Columns["Numer rejestracyjny"].ColumnName = "Rent_Car_Plate_No";
+            rents.Columns["Od kiedy"].ColumnName = "Rent_From";
+            rents.Columns["Koszt wynajmu"].ColumnName = "Rent_Cost";
             fillRentTable();
             rentdatagrid.Items.Refresh();
         }
@@ -114,10 +118,10 @@ namespace Rent_a_car.pages.rent
 
         private void deleterent_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Tanlangan arendani o'chirishni hohlamoqchimisiz ? ",
-                   "Savol",
-                   MessageBoxButton.YesNo,
-                   MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Czy chcesz usunąć wybrany wynajem ?",
+                    "Czy jesteś pewien ?",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 if (rentdatagrid.SelectedItem != null)
                 {
@@ -129,28 +133,28 @@ namespace Rent_a_car.pages.rent
                     {
                         // Get the value of the "Numer Vin" column
                         string numerVin = selectedItem["ID"].ToString();
-                        string plateno = selectedItem["Avto raqami"].ToString();
-                        string clientName = selectedItem["Mijoz Ismi"].ToString();
+                        string plateno = selectedItem["Numer rejestracyjny"].ToString();
+                        string clientName = selectedItem["Imie Klienta"].ToString();
                         try
                         {
                             MySqlConnection connection = new MySqlConnection(connectionString);
                             connection.Open();
 
-                            string updateQuery = "UPDATE rentings SET Rent_Status = 'aktiv emas' WHERE Rent_ID = @id";
+                            string updateQuery = "UPDATE rentings SET Rent_Status = 'Nie aktywny' WHERE Rent_ID = @id";
                             using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, connection))
                             {
                                 updateCmd.Parameters.AddWithValue("@id", numerVin);
                                 updateCmd.ExecuteNonQuery();
                             }
 
-                            string updateQuery2 = "UPDATE rentperiods SET Rent_Status = 'aktiv emas' WHERE Client_Name = @name AND Car_Plate_No = @plateno";
+                            string updateQuery2 = "UPDATE rentperiods SET Rent_Status = 'Nie aktywny' WHERE Client_Name = @name AND Car_Plate_No = @plateno";
                             using (MySqlCommand updateCmd2 = new MySqlCommand(updateQuery2, connection))
                             {
                                 updateCmd2.Parameters.AddWithValue("@name", clientName);
                                 updateCmd2.Parameters.AddWithValue("@plateno", plateno);
                                 updateCmd2.ExecuteNonQuery();
                             }
-                            string updateQuery3 = "UPDATE cars SET Car_Status = 'Olinmagan' WHERE Cars_No = @plate";
+                            string updateQuery3 = "UPDATE cars SET Car_Status = 'Nie wynajęte' WHERE Cars_No = @plate";
                             using (MySqlCommand updateCmd3 = new MySqlCommand(updateQuery3, connection))
                             {
                                 updateCmd3.Parameters.AddWithValue("@plateno", plateno);
@@ -179,10 +183,10 @@ namespace Rent_a_car.pages.rent
                 if (selectedItem != null)
                 {
                     // Get the value of the "Numer Vin" column
-                    Properties.Settings.Default.RentCarPlate = selectedItem["Avto raqami"].ToString();
-                    Properties.Settings.Default.RentClientName = selectedItem["Mijoz Ismi"].ToString();
+                    Properties.Settings.Default.RentCarPlate = selectedItem["Numer rejestracyjny"].ToString();
+                    Properties.Settings.Default.RentClientName = selectedItem["Imie Klienta"].ToString();
                     Properties.Settings.Default.IsRentings = true;
-                    Properties.Settings.Default.FillQuery = "SELECT Period_ID,Client_Name,Car_Plate_No,Period_From,Period_Until,Period_Cost,Payment_Status, Client_ID FROM rentperiods WHERE Rent_Status = 'aktiv' AND Client_Name = @clientname AND Car_Plate_No = @plateno";
+                    Properties.Settings.Default.FillQuery = "SELECT Period_ID,Client_Name,Car_Plate_No,Period_From,Period_Until,Period_Cost,Payment_Status, Payment_Amount, Client_ID FROM rentperiods WHERE Rent_Status = 'aktywny' AND Client_Name = @clientname AND Car_Plate_No = @plateno";
 
                     Properties.Settings.Default.Save();
                     periodmainwindow periodmainwindow = new periodmainwindow();

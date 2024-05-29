@@ -6,13 +6,13 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Rent_a_car.pages.rent"
         mc:Ignorable="d"
-        Title="Qachondan va Narxi" Height="201" Width="312" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+        Title="Od kiedy i koszt" Height="201" Width="312" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid>
-        <Label Content="Qachondan:" HorizontalAlignment="Left" Margin="26,20,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
-        <Label  Content="Xaftalik Narxi:" HorizontalAlignment="Left" Margin="26,60,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
-        <Button x:Name="rentaddbtn" Content="Saqlash" HorizontalAlignment="Center" Margin="0,119,0,0" VerticalAlignment="Top" Width="102" Background="CornflowerBlue" FontFamily="Orbitron" Click="rentaddbtn_Click"/>
-        <DatePicker Name="datefrompicker" HorizontalAlignment="Left" Margin="149,20,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="costtxt" HorizontalAlignment="Left" Margin="149,59,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="Costtxt_PreviewTextInput"/>
+        <Label Content="Od kiedy:" HorizontalAlignment="Left" Margin="26,20,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
+        <Label  Content="Koszt wynajmu:" HorizontalAlignment="Left" Margin="26,60,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
+        <Button x:Name="rentaddbtn" Content="Zapisz" HorizontalAlignment="Center" Margin="0,119,0,0" VerticalAlignment="Top" Width="102" Background="CornflowerBlue" FontFamily="Orbitron" Click="rentaddbtn_Click"/>
+        <DatePicker Name="datefrompicker" HorizontalAlignment="Left" Margin="157,20,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="costtxt" HorizontalAlignment="Left" Margin="157,59,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="Costtxt_PreviewTextInput"/>
 
     </Grid>
 </mah:MetroWindow>

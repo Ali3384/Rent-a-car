@@ -11,21 +11,21 @@
 
     <Grid>
         <DataGrid x:Name="carsdatagrid" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="0,80,0,0" Background="White" FontFamily="Times New Roman" LoadingRow="carsdatagrid_LoadingRow" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="Blue" VerticalGridLinesBrush="Blue"/>
-        <Button x:Name="deletecar" Content="Avtomobilni o'chirish" HorizontalAlignment="Left" Margin="636,22,0,0" VerticalAlignment="Top" Width="159" Background="LightBlue" Height="38" FontFamily="Orbitron" Click="deletecar_Click"/>
-        <Button x:Name="addcar" Content="Yangi Avtomobil" HorizontalAlignment="Left" Margin="486,22,0,0" VerticalAlignment="Top" Width="143" Background="LightBlue" FontFamily="Orbitron" Height="38" Click="addcar_Click" />
-        <TextBox x:Name="carsfilter" HorizontalAlignment="Left" Margin="73,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" FontFamily="Orbitron" TextChanged="carsfilter_TextChanged"/>
-        <Label Content="Qidiruv:" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>
-        <Label Content="Qidiruv turi:" HorizontalAlignment="Left" Margin="246,27,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>
-        <ComboBox x:Name="carscombobox" HorizontalAlignment="Left" Margin="337,28,0,0" VerticalAlignment="Top" Width="120" FontFamily="Orbitron" SelectionChanged="carscombobox_SelectionChanged" FontSize="10">
-            <ComboBoxItem Content="Markasi"/>
-            <ComboBoxItem Content="Modeli"/>
+        <Button x:Name="deletecar" Content="Usuń pojazd" HorizontalAlignment="Left" Margin="687,22,0,0" VerticalAlignment="Top" Width="118" Background="LightBlue" Height="38" FontFamily="Orbitron" Click="deletecar_Click"/>
+        <Button x:Name="addcar" Content="Nowy pojazd" HorizontalAlignment="Left" Margin="542,22,0,0" VerticalAlignment="Top" Width="127" Background="LightBlue" FontFamily="Orbitron" Height="38" Click="addcar_Click" />
+        <TextBox x:Name="carsfilter" HorizontalAlignment="Left" Margin="73,28,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="168" FontFamily="Orbitron" TextChanged="carsfilter_TextChanged"/>
+        <Label Content="Szukaj:" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>
+        <Label Content="Szukaj według:" HorizontalAlignment="Left" Margin="246,27,0,0" VerticalAlignment="Top" FontFamily="Orbitron Black"/>
+        <ComboBox x:Name="carscombobox" HorizontalAlignment="Left" Margin="367,28,0,0" VerticalAlignment="Top" Width="120" FontFamily="Orbitron" SelectionChanged="carscombobox_SelectionChanged" FontSize="10">
+            <ComboBoxItem Content="Marka pojazdu"/>
+            <ComboBoxItem Content="Model pojazdu"/>
             <ComboBoxItem Content="Vin No"/>
-            <ComboBoxItem Content="Yili"/>
-            <ComboBoxItem Content="Raqami"/>
-            <ComboBoxItem Content="Yoqilg'i turi"/>
-            <ComboBoxItem Content="Statusi"/>
+            <ComboBoxItem Content="Rok produkcji"/>
+            <ComboBoxItem Content="Numer rejestracyjny"/>
+            <ComboBoxItem Content="Rodzaj paliwa"/>
+            <ComboBoxItem Content="Status"/>
         </ComboBox>
         <Button Style="{DynamicResource MahApps.Styles.Button.Circle}" HorizontalAlignment="Left" Margin="824,24,0,0" VerticalAlignment="Top" Width="33" Height="33" Click="Button_Click" Content="{iconPacks:Modern Refresh}"/>
-        <Label Content="Yangilash" HorizontalAlignment="Left" Margin="862,24,0,0" VerticalAlignment="Top" Height="47" Width="108" FontFamily="Orbitron" FontSize="18"/>
+        <Label Content="Odśwież" HorizontalAlignment="Left" Margin="862,24,0,0" VerticalAlignment="Top" Height="47" Width="108" FontFamily="Univers" FontSize="18" FontWeight="Bold"/>
     </Grid>
 </Page>

@@ -45,7 +45,7 @@ namespace Rent_a_car.pages.rent
                 {
                     connection = new MySqlConnection(connectionString);
                     connection.Open();
-                    string insertQuery = "INSERT INTO rentings (Rent_Car_Plate_No, Rent_Client_Name, Rent_Client_Surname, Client_ID, Rent_Cost, Rent_From, Rent_Status) VALUES (@plate, @name, @surname, @clientid, @cost, @from, 'aktiv')";
+                    string insertQuery = "INSERT INTO rentings (Rent_Car_Plate_No, Rent_Client_Name, Rent_Client_Surname, Client_ID, Rent_Cost, Rent_From, Rent_Status) VALUES (@plate, @name, @surname, @clientid, @cost, @from, 'aktywny')";
                     using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                     {
                         insertCmd.Parameters.AddWithValue("@plate", Properties.Settings.Default.SelectedCarPlate);
@@ -67,7 +67,7 @@ namespace Rent_a_car.pages.rent
                     string periodUntil = datefrompicker.SelectedDate.Value.AddDays(7).ToString("yyyy-MM-dd");
                     connection = new MySqlConnection(connectionString);
                     connection.Open();
-                    string insertQuery = "INSERT INTO rentperiods (Car_Plate_No, Client_Name, Payment_Status, Period_Cost, Period_From, Period_Until, Period_Status, Client_ID,Rent_Status) VALUES (@plate, @name, 'Tolanmagan', @cost, @from, @until, 'aktiv', @clientid, 'aktiv')";
+                    string insertQuery = "INSERT INTO rentperiods (Car_Plate_No, Client_Name, Payment_Status, Period_Cost, Period_From, Period_Until, Period_Status, Client_ID,Rent_Status) VALUES (@plate, @name, 'Niezapłacona', @cost, @from, @until, 'aktiv', @clientid, 'aktywny')";
                     using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                     {
                         insertCmd.Parameters.AddWithValue("@plate", Properties.Settings.Default.SelectedCarPlate);
@@ -88,7 +88,7 @@ namespace Rent_a_car.pages.rent
             }
             else
             {
-                MessageBox.Show("Iltimos barcha ma'lumot kiriting.", "Xato", MessageBoxButton.OK);
+                MessageBox.Show("Proszę wypełnić wszystkie pola.", "Błąd", MessageBoxButton.OK);
             }
         }
         private void inactiveCar()
@@ -98,7 +98,7 @@ namespace Rent_a_car.pages.rent
             {
                 connection = new MySqlConnection(connectionString);
                 connection.Open();
-                string insertQuery = "UPDATE cars SET Cars_Status = 'Arendada' WHERE Cars_No = @plate";
+                string insertQuery = "UPDATE cars SET Cars_Status = 'Wynajęte' WHERE Cars_No = @plate";
                 using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                 {
                     insertCmd.Parameters.AddWithValue("@plate", Properties.Settings.Default.SelectedCarPlate);

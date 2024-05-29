@@ -38,7 +38,7 @@ namespace Rent_a_car.pages.cars
 
         private void fueltypecmbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (((ComboBoxItem)fueltypecmbx.SelectedItem).Content.ToString() == "LPG/Benzin" || ((ComboBoxItem)fueltypecmbx.SelectedItem).Content.ToString() == "LPG/Hybrid")
+            if (((ComboBoxItem)fueltypecmbx.SelectedItem).Content.ToString() == "Benzyna+LPG" || ((ComboBoxItem)fueltypecmbx.SelectedItem).Content.ToString() == "LPG/Hybrida")
             {
                 lpgdatepicker.IsEnabled = true;
             }
@@ -69,13 +69,13 @@ namespace Rent_a_car.pages.cars
                     string fueltype = ((ComboBoxItem)fueltypecmbx.SelectedItem).Content.ToString();
                     string insurance = insurancedatepicker.SelectedDate.Value.ToString("yyyy-MM-dd");
                     string servicedate = servicedatepicker.SelectedDate.Value.ToString("yyyy-MM-dd");
-                    string lpg = lpgdatepicker.IsEnabled && lpgdatepicker.SelectedDate.HasValue ? lpgdatepicker.SelectedDate.Value.ToString("yyyy-MM-dd") : "LPGsiz";
+                    string lpg = lpgdatepicker.IsEnabled && lpgdatepicker.SelectedDate.HasValue ? lpgdatepicker.SelectedDate.Value.ToString("yyyy-MM-dd") : "Bez Gazu";
 
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
                         connection.Open();
                         string insertQuery = "INSERT INTO cars (Cars_Brand, Cars_Model, Cars_Year, Cars_Vin, Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance, Cars_ServiceDate, Cars_LPG_Date) " +
-                                             "VALUES (@brand, @model, @year, @vin, @plateno, @fueltype, 'Olinmagan', @insurance, @servicedate, @lpg)";
+                                             "VALUES (@brand, @model, @year, @vin, @plateno, @fueltype, 'Nie wynajęte', @insurance, @servicedate, @lpg)";
 
                         using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                         {
@@ -92,7 +92,6 @@ namespace Rent_a_car.pages.cars
                             int rowsAffected = insertCmd.ExecuteNonQuery();
                             if (rowsAffected > 0)
                             {
-                                MessageBox.Show("Data inserted successfully.");
                                 this.Close();
                             }
                             else
@@ -109,7 +108,7 @@ namespace Rent_a_car.pages.cars
             }
             else
             {
-                MessageBox.Show("Iltimos barcha ma'lumot kiriting.", "Xato", MessageBoxButton.OK);
+                MessageBox.Show("Proszę wypełnić wszystkie pola.", "Błąd", MessageBoxButton.OK);
             }
         }
 

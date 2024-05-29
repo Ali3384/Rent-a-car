@@ -40,17 +40,17 @@ namespace Rent_a_car.pages.clients
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT Client_ID,Client_Name,Client_Surname,Client_Document_No,Client_Tel,Client_Debit FROM clients WHERE Client_Status = 'aktiv'";
+                    string query = "SELECT Client_ID,Client_Name,Client_Surname,Client_Document_No,Client_Tel,Client_Debit FROM clients WHERE Client_Status = 'aktywny'";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(command);
 
                     adapter.Fill(clients);
-                    clients.Columns["Client_ID"].ColumnName = "Mijoz ID";
-                    clients.Columns["Client_Name"].ColumnName = "Ismi";
-                    clients.Columns["Client_Surname"].ColumnName = "Familiyasi";
-                    clients.Columns["Client_Document_No"].ColumnName = "Hujjat No";
-                    clients.Columns["Client_Tel"].ColumnName = "Telefon No";
-                    clients.Columns["Client_Debit"].ColumnName = "Mijoz qarzi";
+                    clients.Columns["Client_ID"].ColumnName = "ID";
+                    clients.Columns["Client_Name"].ColumnName = "Imie";
+                    clients.Columns["Client_Surname"].ColumnName = "Nazwisko";
+                    clients.Columns["Client_Document_No"].ColumnName = "Dowód Nr";
+                    clients.Columns["Client_Tel"].ColumnName = "Telefon Nr";
+                    clients.Columns["Client_Debit"].ColumnName = "Dług klienta";
                     clientsdatagrid.ItemsSource = clients.DefaultView;
                 }
             }
@@ -92,7 +92,7 @@ namespace Rent_a_car.pages.clients
             DataRowView rowView = e.Row.Item as DataRowView;
             if (rowView != null)
             {
-                int debit = int.Parse(rowView["Mijoz Qarzi"].ToString());
+                int debit = int.Parse(rowView["Dług klienta"].ToString());
                 
                     if (debit > 400)
                     {
@@ -111,12 +111,12 @@ namespace Rent_a_car.pages.clients
         public void updateClient()
         {
             clients.Clear();
-            clients.Columns["Mijoz ID"].ColumnName = "Client_ID";
-            clients.Columns["Ismi"].ColumnName = "Client_Name";
-            clients.Columns["Familiyasi"].ColumnName = "Client_Surname";
-            clients.Columns["Hujjat No"].ColumnName = "Client_Document_No";
-            clients.Columns["Telefon No"].ColumnName = "Client_Tel";
-            clients.Columns["Mijoz qarzi"].ColumnName = "Client_Debit";
+            clients.Columns["ID"].ColumnName = "Client_ID";
+            clients.Columns["Imie"].ColumnName = "Client_Name";
+            clients.Columns["Nazwisko"].ColumnName = "Client_Surname";
+            clients.Columns["Dowód Nr"].ColumnName = "Client_Document_No";
+            clients.Columns["Telefon Nr"].ColumnName = "Client_Tel";
+            clients.Columns["Dług klienta"].ColumnName = "Client_Debit";
             fillClientsTable();
             clientsdatagrid.Items.Refresh();
         }
@@ -128,10 +128,10 @@ namespace Rent_a_car.pages.clients
 
         private void deleteclient_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Tanlangan mijozni o'chirishni hohlamoqchimisiz ? ",
-                   "Savol",
-                   MessageBoxButton.YesNo,
-                   MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Czy chcesz usunąć wybranego klienta ?",
+                    "Czy jesteś pewien ?",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 if (clientsdatagrid.SelectedItem != null)
                 {
@@ -141,13 +141,13 @@ namespace Rent_a_car.pages.clients
                     if (selectedItem != null)
                     {
                         // Get the value of the "Numer Vin" column
-                        string numerVin = selectedItem["Mijoz ID"].ToString();
+                        string numerVin = selectedItem["ID"].ToString();
                         try
                         {
                             MySqlConnection connection = new MySqlConnection(connectionString);
                             connection.Open();
 
-                            string updateQuery = "UPDATE clients SET Client_Status = 'aktiv emas' WHERE Client_ID = @id";
+                            string updateQuery = "UPDATE clients SET Client_Status = 'nie aktywny' WHERE Client_ID = @id";
                             using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, connection))
                             {
                                 updateCmd.Parameters.AddWithValue("@id", numerVin);
@@ -174,9 +174,9 @@ namespace Rent_a_car.pages.clients
 
                 if (selectedItem != null)
                 {
-                    Properties.Settings.Default.RentClientID = selectedItem["Mijoz ID"].ToString();
+                    Properties.Settings.Default.RentClientID = selectedItem["ID"].ToString();
                     Properties.Settings.Default.IsRentings = false;
-                    Properties.Settings.Default.FillQuery = "SELECT Period_ID,Client_Name,Car_Plate_No,Period_From,Period_Until,Period_Cost,Payment_Status, Client_ID FROM rentperiods WHERE Payment_Status = 'Tolanmagan' AND Client_ID = @clientid";
+                    Properties.Settings.Default.FillQuery = "SELECT Period_ID,Client_Name,Car_Plate_No,Period_From,Period_Until,Period_Cost,Payment_Status, Payment_Amount, Client_ID FROM rentperiods WHERE Payment_Status = 'Niezapłacona' AND Client_ID = @clientid";
 
                     Properties.Settings.Default.Save();
                     periodmainwindow periodmainwindow = new periodmainwindow();

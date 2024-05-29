@@ -7,12 +7,12 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="Arenda haqida ma'lumot" Height="800" Width="1200" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/sedan.png" Closed="MetroWindow_Closed">
+        Title="Informacja o wynajmu" Height="800" Width="1200" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/sedan.png" Closed="MetroWindow_Closed">
     <Grid>
-        <Label Content="Arenda haftalari" HorizontalAlignment="Left" Margin="22,44,0,0" VerticalAlignment="Top" FontFamily="Orbitron SemiBold" FontSize="36"/>
+        <Label Content="Okresy wynajmu" HorizontalAlignment="Left" Margin="22,44,0,0" VerticalAlignment="Top" FontFamily="Orbitron SemiBold" FontSize="36"/>
         <DataGrid Name="periodsdatagrid" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="0,114,0,0" Background="White" FontFamily="Times New Roman" LoadingRow="periodsdatagrid_LoadingRow" HorizontalGridLinesBrush="Blue" VerticalGridLinesBrush="Blue" GridLinesVisibility="Horizontal" >
 
         </DataGrid>
-        <Button x:Name="addpayment" Content="To'lov qo'shmoq" HorizontalAlignment="Left" Margin="1005,52,0,0" VerticalAlignment="Top" Width="131" Background="LightBlue" Height="38" FontFamily="Orbitron" Click="addpayment_Click"/>
+        <Button x:Name="addpayment" Content="Dokonać opłaty" HorizontalAlignment="Left" Margin="1005,52,0,0" VerticalAlignment="Top" Width="131" Background="LightBlue" Height="38" FontFamily="Orbitron" Click="addpayment_Click"/>
     </Grid>
 </mah:MetroWindow>

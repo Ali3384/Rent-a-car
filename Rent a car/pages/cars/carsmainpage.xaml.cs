@@ -43,16 +43,16 @@ namespace Rent_a_car.pages.cars
 
                     adapter.Fill(cars);
                     cars.Columns["Cars_ID"].ColumnName = "ID";
-                    cars.Columns["Cars_Brand"].ColumnName = "Markasi";
-                    cars.Columns["Cars_Model"].ColumnName = "Modeli";
-                    cars.Columns["Cars_Year"].ColumnName = "Yili";
+                    cars.Columns["Cars_Brand"].ColumnName = "Marka pojazdu";
+                    cars.Columns["Cars_Model"].ColumnName = "Model pojazdu";
+                    cars.Columns["Cars_Year"].ColumnName = "Rok produkcji";
                     cars.Columns["Cars_Vin"].ColumnName = "Vin No";
-                    cars.Columns["Cars_No"].ColumnName = "Raqami";
-                    cars.Columns["Cars_Fuel"].ColumnName = "Yoqilg'i turi";
-                    cars.Columns["Cars_Status"].ColumnName = "Statusi";
-                    cars.Columns["Cars_Insurance"].ColumnName = "Sug'urta";
-                    cars.Columns["Cars_ServiceDate"].ColumnName = "Texnik ko'rik";
-                    cars.Columns["Cars_LPG_Date"].ColumnName = "LPG";
+                    cars.Columns["Cars_No"].ColumnName = "Numer rejestracyjny";
+                    cars.Columns["Cars_Fuel"].ColumnName = "Rodzaj paliwa";
+                    cars.Columns["Cars_Status"].ColumnName = "Status";
+                    cars.Columns["Cars_Insurance"].ColumnName = "Ubezpieczenia";
+                    cars.Columns["Cars_ServiceDate"].ColumnName = "Przegląd";
+                    cars.Columns["Cars_LPG_Date"].ColumnName = "Ważność butli LPG";
                     carsdatagrid.ItemsSource = cars.DefaultView;
                 }
             }
@@ -94,7 +94,7 @@ namespace Rent_a_car.pages.cars
                 DataRowView rowView = e.Row.Item as DataRowView;
                 if (rowView != null)
                 {
-                    string insurancedateStr = rowView["Sug'urta"].ToString();
+                    string insurancedateStr = rowView["Ubezpieczenia"].ToString();
 
                     if (DateTime.TryParse(insurancedateStr, out DateTime date))
                     {
@@ -123,16 +123,16 @@ namespace Rent_a_car.pages.cars
         {
             cars.Clear();
             cars.Columns["ID"].ColumnName = "Cars_ID";
-            cars.Columns["Markasi"].ColumnName = "Cars_Brand";
-            cars.Columns["Modeli"].ColumnName = "Cars_Model";
-            cars.Columns["Yili"].ColumnName = "Cars_Year";
+            cars.Columns["Marka pojazdu"].ColumnName = "Cars_Brand";
+            cars.Columns["Model pojazdu"].ColumnName = "Cars_Model";
+            cars.Columns["Rok produkcji"].ColumnName = "Cars_Year";
             cars.Columns["Vin No"].ColumnName = "Cars_Vin";
-            cars.Columns["Raqami"].ColumnName = "Cars_No";
-            cars.Columns["Yoqilg'i turi"].ColumnName = "Cars_Fuel";
-            cars.Columns["Statusi"].ColumnName = "Cars_Status";
-            cars.Columns["Sug'urta"].ColumnName = "Cars_Insurance";
-            cars.Columns["Texnik ko'rik"].ColumnName = "Cars_ServiceDate";
-            cars.Columns["LPG"].ColumnName = "Cars_LPG_Date";
+            cars.Columns["Numer rejestracyjny"].ColumnName = "Cars_No";
+            cars.Columns["Rodzaj paliwa"].ColumnName = "Cars_Fuel";
+            cars.Columns["Status"].ColumnName = "Cars_Status";
+            cars.Columns["Ubezpieczenia"].ColumnName = "Cars_Insurance";
+            cars.Columns["Przegląd"].ColumnName = "Cars_ServiceDate";
+            cars.Columns["Ważność butli LPG"].ColumnName = "Cars_LPG_Date";
             fillCarsTable();
             carsdatagrid.Items.Refresh();
         }
@@ -144,8 +144,8 @@ namespace Rent_a_car.pages.cars
 
         private void deletecar_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Tanlangan avtomobilni o'chirishni hohlamoqchimisiz ? ",
-                    "Savol",
+            if (MessageBox.Show("Czy chcesz usunąć wybrany pojazd ?",
+                    "Czy jesteś pewien ?",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question) == MessageBoxResult.Yes)
             {

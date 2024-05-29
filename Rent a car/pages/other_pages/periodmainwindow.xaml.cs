@@ -52,13 +52,14 @@ namespace Rent_a_car.pages.other_pages
                     MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                     adapter.Fill(periods);
                     periods.Columns["Period_ID"].ColumnName = "ID";
-                    periods.Columns["Client_Name"].ColumnName = "Mijoz Ismi";
-                    periods.Columns["Car_Plate_No"].ColumnName = "Avto raqami";
-                    periods.Columns["Period_From"].ColumnName = "Qachondan";
-                    periods.Columns["Period_Until"].ColumnName = "Qachongacha";
-                    periods.Columns["Period_Cost"].ColumnName = "Arenda narxi";
-                    periods.Columns["Payment_Status"].ColumnName = "To'lov";
-                    periods.Columns["Client_ID"].ColumnName = "Mijoz ID";
+                    periods.Columns["Client_Name"].ColumnName = "Imie klienta";
+                    periods.Columns["Car_Plate_No"].ColumnName = "Nr Pojazdu";
+                    periods.Columns["Period_From"].ColumnName = "Od";
+                    periods.Columns["Period_Until"].ColumnName = "Do";
+                    periods.Columns["Period_Cost"].ColumnName = "Koszt najmu";
+                    periods.Columns["Payment_Status"].ColumnName = "Opłata";
+                    periods.Columns["Payment_Amount"].ColumnName = "Zapłacona (zl)";
+                    periods.Columns["Client_ID"].ColumnName = "Klient ID";
                     periodsdatagrid.ItemsSource = periods.DefaultView;
                 }
             }
@@ -79,8 +80,8 @@ namespace Rent_a_car.pages.other_pages
             DataRowView rowView = e.Row.Item as DataRowView;
             if (rowView != null)
             {
-                string paymentstatus = rowView["To'lov"].ToString();
-                if(paymentstatus == "Tolanmagan")
+                string paymentstatus = rowView["Opłata"].ToString();
+                if(paymentstatus == "Niezapłacona")
                 {
                     e.Row.Background = new SolidColorBrush(Color.FromRgb(255, 127, 127));
                 }
@@ -97,12 +98,12 @@ namespace Rent_a_car.pages.other_pages
 
                 if (selectedItem != null)
                 {
-                    if (selectedItem["To'lov"].ToString() == "Tolanmagan")
+                    if (selectedItem["Opłata"].ToString() == "Niezapłacona")
                     {
-                        Properties.Settings.Default.PeriodCarPlate = selectedItem["Avto raqami"].ToString();
+                        Properties.Settings.Default.PeriodCarPlate = selectedItem["Nr Pojazdu"].ToString();
                         Properties.Settings.Default.PeriodID = selectedItem["ID"].ToString();
-                        Properties.Settings.Default.PeriodClientName = selectedItem["Mijoz Ismi"].ToString();
-                        Properties.Settings.Default.PeriodClientID = selectedItem["Mijoz ID"].ToString();
+                        Properties.Settings.Default.PeriodClientName = selectedItem["Imie klienta"].ToString();
+                        Properties.Settings.Default.PeriodClientID = selectedItem["Klient ID"].ToString();
                         Properties.Settings.Default.Save();
                         addpaymentwindow addpaymentwindow = new addpaymentwindow();
                         addpaymentwindow.ShowDialog();
@@ -112,7 +113,7 @@ namespace Rent_a_car.pages.other_pages
                     }
                     else
                     {
-                        MessageBox.Show("Tanlangan ijara davri to'langan !!!", "Xato");
+                        MessageBox.Show("Wybrany okres jest opłacony !!!", "Błąd");
                     }
                     
                 }
@@ -123,13 +124,14 @@ namespace Rent_a_car.pages.other_pages
         {
             periods.Clear();
             periods.Columns["ID"].ColumnName = "Period_ID";
-            periods.Columns["Mijoz Ismi"].ColumnName = "Client_Name";
-            periods.Columns["Avto raqami"].ColumnName = "Car_Plate_No";
-            periods.Columns["Qachondan"].ColumnName = "Period_From";
-            periods.Columns["Qachongacha"].ColumnName = "Period_Until";
-            periods.Columns["Arenda narxi"].ColumnName = "Period_Cost";
-            periods.Columns["To'lov"].ColumnName = "Payment_Status";
-            periods.Columns["Mijoz ID"].ColumnName = "Client_ID";
+            periods.Columns["Imie klienta"].ColumnName = "Client_Name";
+            periods.Columns["Nr Pojazdu"].ColumnName = "Car_Plate_No";
+            periods.Columns["Od"].ColumnName = "Period_From";
+            periods.Columns["Do"].ColumnName = "Period_Until";
+            periods.Columns["Koszt najmu"].ColumnName = "Period_Cost";
+            periods.Columns["Opłata"].ColumnName = "Payment_Status";
+            periods.Columns["Zapłacona (zl)"].ColumnName = "Payment_Amount";
+            periods.Columns["Klient ID"].ColumnName = "Client_ID";
             fillPeriodsTable();
             periodsdatagrid.Items.Refresh();
 

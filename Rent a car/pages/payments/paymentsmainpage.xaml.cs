@@ -47,13 +47,13 @@ namespace Rent_a_car.pages.payments
 
                     adapter.Fill(payments);
                     payments.Columns["Payment_ID"].ColumnName = "ID";
-                    payments.Columns["Period_ID"].ColumnName = "Period ID";
-                    payments.Columns["Payment_Date"].ColumnName = "To'lov Sanasi";
-                    payments.Columns["Client_Name"].ColumnName = "Mijoz Ismi";
-                    payments.Columns["Car_Plate_No"].ColumnName = "Avtomobil raqami";
-                    payments.Columns["Payment_Amount"].ColumnName = "To'lov miqdori";
-                    payments.Columns["Payment_Method"].ColumnName = "To'lov turi";
-                    payments.Columns["Client_ID"].ColumnName = "Mijoz ID";
+                    payments.Columns["Period_ID"].ColumnName = "Okres ID";
+                    payments.Columns["Payment_Date"].ColumnName = "Data Opłaty";
+                    payments.Columns["Client_Name"].ColumnName = "Imie Klienta";
+                    payments.Columns["Car_Plate_No"].ColumnName = "Nr Pojazdu";
+                    payments.Columns["Payment_Amount"].ColumnName = "Suma Opłaty";
+                    payments.Columns["Payment_Method"].ColumnName = "Typ Opłaty";
+                    payments.Columns["Client_ID"].ColumnName = "ID Klienta";
                     paymentsdatagrid.ItemsSource = payments.DefaultView;
                 }
             }
@@ -123,8 +123,8 @@ namespace Rent_a_car.pages.payments
 
             if (selectedItem != null)
             {
-                periodid = selectedItem["Period ID"].ToString();
-                clientid = selectedItem["Mijoz ID"].ToString();
+                periodid = selectedItem["Okres ID"].ToString();
+                clientid = selectedItem["ID Klienta"].ToString();
             }
             string updateDebitQuery = "UPDATE clients SET Client_Debit = Client_Debit + @Amount WHERE Client_ID = @Client_ID;";
 
@@ -144,7 +144,7 @@ namespace Rent_a_car.pages.payments
                     Console.WriteLine("Error: " + ex.Message);
                 }
             }
-            string updateDebitQuery2 = "UPDATE rentperiods SET Payment_Status = 'Tolanmagan' WHERE Period_ID = @periodid;";
+            string updateDebitQuery2 = "UPDATE rentperiods SET Payment_Status = 'Niezapłacona' WHERE Period_ID = @periodid;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -167,8 +167,8 @@ namespace Rent_a_car.pages.payments
         {
             if(paymentsdatagrid.SelectedItems.Count > 0)
             {
-                if (MessageBox.Show("To'lovni o'chirib tashlamoqchimisiz ?",
-                     "O'chirish",
+                if (MessageBox.Show("Czy chcesz usunąć wybranej opłaty ?",
+                     "Czy jesteś pewien ?",
                      MessageBoxButton.YesNo,
                      MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
@@ -187,13 +187,13 @@ namespace Rent_a_car.pages.payments
         {
             payments.Clear();
             payments.Columns["ID"].ColumnName = "Payment_ID";
-            payments.Columns["Period ID"].ColumnName = "Period_ID";
-            payments.Columns["To'lov Sanasi"].ColumnName = "Payment_Date";
-            payments.Columns["Mijoz Ismi"].ColumnName = "Client_Name";
-            payments.Columns["Avtomobil raqami"].ColumnName = "Car_Plate_No";
-            payments.Columns["To'lov miqdori"].ColumnName = "Payment_Amount";
-            payments.Columns["To'lov turi"].ColumnName = "Payment_Method";
-            payments.Columns["Mijoz ID"].ColumnName = "Client_ID";
+            payments.Columns["Okres ID"].ColumnName = "Period_ID";
+            payments.Columns["Data Opłaty"].ColumnName = "Payment_Date";
+            payments.Columns["Imie Klienta"].ColumnName = "Client_Name";
+            payments.Columns["Nr Pojazdu"].ColumnName = "Car_Plate_No";
+            payments.Columns["Suma Opłaty"].ColumnName = "Payment_Amount";
+            payments.Columns["Typ Opłaty"].ColumnName = "Payment_Method";
+            payments.Columns["ID Klienta"].ColumnName = "Client_ID";
             fillPaymentsTable();
             paymentsdatagrid.Items.Refresh();
 

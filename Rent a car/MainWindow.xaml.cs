@@ -8,6 +8,7 @@ using Rent_a_car.pages.rent;
 using Rent_a_car.pages.cars;
 using System.Windows.Controls;
 using Rent_a_car.pages.payments;
+using System.Timers;
 
 namespace Rent_a_car
 {
@@ -17,7 +18,7 @@ namespace Rent_a_car
         double debitstatus;
         int freecars;
         int rentedcars;
-
+        private Timer updateDatabaseTimer;
         public MainWindow()
         {
             InitializeComponent();
@@ -26,6 +27,7 @@ namespace Rent_a_car
             clientsframe.Content = new Rent_a_car.pages.clients.clientsmainpage();
             paymentsframe.Content = new Rent_a_car.pages.payments.paymentsmainpage();
             UpdateDebitStatus();
+            InitializeUpdateDatabaseTimer();
         }
         public void ThemeChangeEvery()
         {
@@ -56,21 +58,21 @@ namespace Rent_a_car
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    MySqlCommand command = new MySqlCommand("SELECT SUM(Client_Debit) FROM clients WHERE Client_Status = 'aktiv'", connection);
+                    MySqlCommand command = new MySqlCommand("SELECT SUM(Client_Debit) FROM clients WHERE Client_Status = 'aktywny'", connection);
                     object result = command.ExecuteScalar();
                     debitstatus = result != DBNull.Value ? Convert.ToDouble(result) : 0.0;
                 }
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    MySqlCommand command = new MySqlCommand("SELECT COUNT(Cars_ID) FROM cars WHERE Cars_Status = 'Arendada'", connection);
+                    MySqlCommand command = new MySqlCommand("SELECT COUNT(Cars_ID) FROM cars WHERE Cars_Status = 'Wynajęte'", connection);
                     object result = command.ExecuteScalar();
                     rentedcars = result != DBNull.Value ? Convert.ToInt32(result) : 0;
                 }
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    MySqlCommand command = new MySqlCommand("SELECT COUNT(Cars_ID) FROM cars WHERE Cars_Status = 'olinmagan'", connection);
+                    MySqlCommand command = new MySqlCommand("SELECT COUNT(Cars_ID) FROM cars WHERE Cars_Status = 'Nie wynajęte'", connection);
                     object result = command.ExecuteScalar();
                     freecars = result != DBNull.Value ? Convert.ToInt32(result) : 0;
                 }
@@ -86,7 +88,7 @@ namespace Rent_a_car
 
         public void UpdateDatabase()
         {
-            string selectQuery = "SELECT *, STR_TO_DATE(Period_Until, '%Y-%m-%d') AS ConvertedDate, CURDATE() FROM rentperiods WHERE STR_TO_DATE(Period_From, '%Y-%m-%d') < CURDATE() AND period_status != 'passed' AND Rent_Status = 'aktiv';"; 
+            string selectQuery = "SELECT *, STR_TO_DATE(Period_Until, '%Y-%m-%d') AS ConvertedDate, CURDATE() FROM rentperiods WHERE STR_TO_DATE(Period_From, '%Y-%m-%d') < CURDATE() AND period_status != 'passed' AND Rent_Status = 'aktywny';"; 
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -126,7 +128,7 @@ namespace Rent_a_car
         private void InsertCopiedRow(string clientName, string carPlateNo, DateTime periodFrom, DateTime periodUntil, int periodCost, string paymentStatus, int clientID)
         {
             string insertQuery = "INSERT INTO rentperiods (Client_Name, Car_Plate_No, Period_From, Period_Until, Period_Cost, Payment_Status, Period_Status, Client_ID,Rent_Status) " +
-                                 "VALUES (@Client_Name, @Car_Plate_No, @Period_From, @Period_Until, @Period_Cost, @Payment_Status, 'aktiv', @Client_ID, 'aktiv');";
+                                 "VALUES (@Client_Name, @Car_Plate_No, @Period_From, @Period_Until, @Period_Cost, @Payment_Status, 'aktywny', @Client_ID, 'aktywny');";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -174,7 +176,7 @@ namespace Rent_a_car
 
         private void UpdateClientDebit(int clientID, int periodCost)
         {
-            string updateDebitQuery = "UPDATE clients SET Client_Debit = Client_Debit + @Amount WHERE Client_ID = @Client_ID;";
+            string updateDebitQuery = "UPDATE clients SET Client_Debit = Client_Debit - @Amount WHERE Client_ID = @Client_ID;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -211,7 +213,25 @@ namespace Rent_a_car
         {
             UpdateDebitStatus();
         }
+        private void InitializeUpdateDatabaseTimer()
+        {
+            updateDatabaseTimer = new Timer(15000); // Set up the timer to trigger every 60 seconds
+            updateDatabaseTimer.Elapsed += OnUpdateDatabaseTimerElapsed;
+            updateDatabaseTimer.AutoReset = true;
+            updateDatabaseTimer.Enabled = true;
+        }
 
+        private void OnUpdateDatabaseTimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            Dispatcher.Invoke(UpdateDatabase); // Use Dispatcher.Invoke to ensure UpdateDatabase runs on the UI thread
+            Dispatcher.Invoke(UpdateDebitStatus);
+        }
+
+        private void MetroWindow_Closed(object sender, EventArgs e)
+        {
+            updateDatabaseTimer.Stop();
+            updateDatabaseTimer.Dispose();
+        }
         private void TabControl_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (MainTab.SelectedItem != null)
@@ -219,16 +239,16 @@ namespace Rent_a_car
                 TabItem selectedTab = (TabItem)MainTab.SelectedItem;
                 switch (selectedTab.Name)
                 {
-                    case "arenda":
+                    case "Najem":
                         rentmainpage.updateRent();
                         break;
-                    case "avtomobillar":
+                    case "Pojazdy":
                         carsmainpage.updateCar();
                         break;
-                    case "klientlar":
+                    case "Klienci":
                         clientsmainpage.updateClient();
                         break;
-                    case "tolovlar":
+                    case "Opłaty ":
                         paymentsmainpage.updatePayments();
                         break;
                 }

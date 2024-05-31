@@ -1,0 +1,16 @@
+﻿<mah:MetroWindow x:Class="Rent_a_car.pages.cars.CarsInfoChange"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Rent_a_car.pages.cars"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d"
+        Title="Informacja o pojazdu" Height="200" Width="320" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Grid>
+        <Label Content="Ubezpieczenia:" HorizontalAlignment="Left" Margin="26,60,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
+        <DatePicker x:Name="insurance" HorizontalAlignment="Left" Margin="167,60,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="changecarinfoaddbtn" Content="Zapisz" HorizontalAlignment="Left" Margin="105,129,0,0" VerticalAlignment="Top" Width="102" Background="CornflowerBlue" FontFamily="Orbitron" Click="changecarinfoaddbtn_Click"/>
+
+    </Grid>
+</mah:MetroWindow>

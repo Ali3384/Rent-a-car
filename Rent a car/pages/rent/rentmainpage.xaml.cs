@@ -27,6 +27,7 @@ namespace Rent_a_car.pages.rent
         string connectionString = Properties.Settings.Default.ConnectionString;
         string rentcomboboxselection;
         string rentfiltertext;
+        string selectedid;
         DataTable rents = new DataTable();
         public rentmainpage()
         {
@@ -196,6 +197,42 @@ namespace Rent_a_car.pages.rent
                     clientsmainpage.updateClient();
                 }
                 
+            }
+        }
+
+        private void rentdatagrid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.F11)
+            {
+                if (rentdatagrid.SelectedItem != null)
+                {
+
+                    // Cast the selected item to a DataRowView to access its columns
+                    var selectedItem = rentdatagrid.SelectedItem as DataRowView;
+
+                    if (selectedItem != null)
+                    {
+                        selectedid = selectedItem["ID"].ToString();
+                        try
+                        {
+                            using (MySqlConnection connection2 = new MySqlConnection(connectionString))
+                            {
+                                connection2.Open();
+                                MySqlCommand command = new MySqlCommand("SELECT Rent_Information FROM rentings WHERE Rent_ID = @id", connection2);
+                                command.Parameters.AddWithValue("@id", Int32.Parse(selectedid));
+                                object result = command.ExecuteScalar();
+                                MessageBox.Show(result.ToString(), "Dane dodatkowe");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error while updating data: " + ex.Message);
+                        }
+
+                    }
+
+
+                }
             }
         }
     }

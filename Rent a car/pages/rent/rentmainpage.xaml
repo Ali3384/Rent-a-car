@@ -10,7 +10,7 @@
       Title="rentmainpage" Background="WhiteSmoke">
 
     <Grid>
-        <DataGrid x:Name="rentdatagrid" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="0,80,0,0" Background="White" FontFamily="Times New Roman" GridLinesVisibility="Horizontal" MouseDoubleClick="rentdatagrid_MouseDoubleClick" HorizontalGridLinesBrush="Blue" VerticalGridLinesBrush="Blue"/>
+        <DataGrid x:Name="rentdatagrid" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="0,80,0,0" Background="White" FontFamily="Times New Roman" GridLinesVisibility="Horizontal" MouseDoubleClick="rentdatagrid_MouseDoubleClick" HorizontalGridLinesBrush="Blue" VerticalGridLinesBrush="Blue" KeyDown="rentdatagrid_KeyDown"/>
         <Button x:Name="deleterent" Content="Usun wynajem" HorizontalAlignment="Left" Margin="664,22,0,0" VerticalAlignment="Top" Width="159" Background="LightBlue" Height="38" FontFamily="Orbitron" Click="deleterent_Click"/>
         <Button x:Name="addrent" Content="Nowy wynajem" HorizontalAlignment="Left" Margin="514,22,0,0" VerticalAlignment="Top" Width="143" Background="LightBlue" FontFamily="Orbitron" Height="38" Click="addrent_Click" />
         <TextBox x:Name="rentfilter" HorizontalAlignment="Left" Margin="73,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" FontFamily="Orbitron" TextChanged="rentfilter_TextChanged"/>

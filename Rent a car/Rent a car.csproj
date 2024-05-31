@@ -241,6 +241,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="pages\cars\CarsInfoChange.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\cars\carsmainpage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -257,11 +261,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="pages\other_pages\CheckConnection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\other_pages\Password.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\other_pages\periodmainwindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="pages\payments\paymentsmainpage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\rent\rentaddinfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -290,6 +306,9 @@
     <Compile Include="pages\cars\carsaddwindow.xaml.cs">
       <DependentUpon>carsaddwindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pages\cars\CarsInfoChange.xaml.cs">
+      <DependentUpon>CarsInfoChange.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\cars\carsmainpage.xaml.cs">
       <DependentUpon>carsmainpage.xaml</DependentUpon>
     </Compile>
@@ -302,11 +321,20 @@
     <Compile Include="pages\other_pages\addpaymentwindow.xaml.cs">
       <DependentUpon>addpaymentwindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pages\other_pages\CheckConnection.xaml.cs">
+      <DependentUpon>CheckConnection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\other_pages\Password.xaml.cs">
+      <DependentUpon>Password.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\other_pages\periodmainwindow.xaml.cs">
       <DependentUpon>periodmainwindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\payments\paymentsmainpage.xaml.cs">
       <DependentUpon>paymentsmainpage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\rent\rentaddinfo.xaml.cs">
+      <DependentUpon>rentaddinfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\rent\rentaddpage1.xaml.cs">
       <DependentUpon>rentaddpage1.xaml</DependentUpon>

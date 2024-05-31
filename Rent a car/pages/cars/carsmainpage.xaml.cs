@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using Rent_a_car.pages.rent;
 
 namespace Rent_a_car.pages.cars
 {
@@ -37,7 +38,7 @@ namespace Rent_a_car.pages.cars
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT Cars_ID,Cars_Brand,Cars_Model,Cars_Year,Cars_Vin,Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance, Cars_ServiceDate, Cars_LPG_Date FROM cars WHERE Cars_Status != 'deleted'";
+                    string query = "SELECT Cars_ID,Cars_Brand,Cars_Model,Cars_Year,Cars_Vin,Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance FROM cars WHERE Cars_Status != 'deleted'";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(command);
 
@@ -51,8 +52,6 @@ namespace Rent_a_car.pages.cars
                     cars.Columns["Cars_Fuel"].ColumnName = "Rodzaj paliwa";
                     cars.Columns["Cars_Status"].ColumnName = "Status";
                     cars.Columns["Cars_Insurance"].ColumnName = "Ubezpieczenia";
-                    cars.Columns["Cars_ServiceDate"].ColumnName = "Przegląd";
-                    cars.Columns["Cars_LPG_Date"].ColumnName = "Ważność butli LPG";
                     carsdatagrid.ItemsSource = cars.DefaultView;
                 }
             }
@@ -131,8 +130,6 @@ namespace Rent_a_car.pages.cars
             cars.Columns["Rodzaj paliwa"].ColumnName = "Cars_Fuel";
             cars.Columns["Status"].ColumnName = "Cars_Status";
             cars.Columns["Ubezpieczenia"].ColumnName = "Cars_Insurance";
-            cars.Columns["Przegląd"].ColumnName = "Cars_ServiceDate";
-            cars.Columns["Ważność butli LPG"].ColumnName = "Cars_LPG_Date";
             fillCarsTable();
             carsdatagrid.Items.Refresh();
         }
@@ -177,6 +174,23 @@ namespace Rent_a_car.pages.cars
                     }
                     updateCar();
                 }
+            }
+        }
+
+        private void carsdatagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (carsdatagrid.SelectedItems.Count > 0)
+            {
+                foreach (DataRowView row in carsdatagrid.SelectedItems)
+                {
+                    System.Data.DataRow myRow = row.Row;
+                    Properties.Settings.Default.CarsSelectedInsurance = myRow["Ubezpieczenia"].ToString();
+                    Properties.Settings.Default.CarsSelectedID =  myRow["ID"].ToString();
+                    Properties.Settings.Default.Save();
+                }
+                CarsInfoChange carsInfoChange = new CarsInfoChange();
+                carsInfoChange.ShowDialog();
+                updateCar();
             }
         }
     }

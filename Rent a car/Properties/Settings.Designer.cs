@@ -225,5 +225,101 @@ namespace Rent_a_car.Properties {
                 this["RentClientID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CarsSelectedInsurance {
+            get {
+                return ((string)(this["CarsSelectedInsurance"]));
+            }
+            set {
+                this["CarsSelectedInsurance"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CarsSelectedService {
+            get {
+                return ((string)(this["CarsSelectedService"]));
+            }
+            set {
+                this["CarsSelectedService"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CarsSelectedLpg {
+            get {
+                return ((string)(this["CarsSelectedLpg"]));
+            }
+            set {
+                this["CarsSelectedLpg"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CarsSelectedID {
+            get {
+                return ((string)(this["CarsSelectedID"]));
+            }
+            set {
+                this["CarsSelectedID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AddInfo {
+            get {
+                return ((string)(this["AddInfo"]));
+            }
+            set {
+                this["AddInfo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool passed {
+            get {
+                return ((bool)(this["passed"]));
+            }
+            set {
+                this["passed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("adrian2024")]
+        public string password {
+            get {
+                return ((string)(this["password"]));
+            }
+            set {
+                this["password"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool connectioncheck {
+            get {
+                return ((bool)(this["connectioncheck"]));
+            }
+            set {
+                this["connectioncheck"] = value;
+            }
+        }
     }
 }

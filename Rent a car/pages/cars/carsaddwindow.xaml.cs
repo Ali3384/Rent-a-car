@@ -29,23 +29,9 @@ namespace Rent_a_car.pages.cars
         int year;
         string fueltype;
         string insurance;
-        string servicedate;
-        string lpg;
         public carsaddwindow()
         {
             InitializeComponent();
-        }
-
-        private void fueltypecmbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (((ComboBoxItem)fueltypecmbx.SelectedItem).Content.ToString() == "Benzyna+LPG" || ((ComboBoxItem)fueltypecmbx.SelectedItem).Content.ToString() == "LPG/Hybrida")
-            {
-                lpgdatepicker.IsEnabled = true;
-            }
-            else
-            {
-                lpgdatepicker.IsEnabled = false;
-            }
         }
 
         private void carsaddbtn_Click(object sender, RoutedEventArgs e)
@@ -56,8 +42,7 @@ namespace Rent_a_car.pages.cars
                 !string.IsNullOrWhiteSpace(platenotxt.Text) &&
                 !string.IsNullOrWhiteSpace(yeartxt.Text) &&
                 fueltypecmbx.SelectedItem != null &&
-                insurancedatepicker.SelectedDate.HasValue &&
-                servicedatepicker.SelectedDate.HasValue)
+                insurancedatepicker.SelectedDate.HasValue)
             {
                 try
                 {
@@ -68,14 +53,12 @@ namespace Rent_a_car.pages.cars
                     int year = int.Parse(yeartxt.Text);
                     string fueltype = ((ComboBoxItem)fueltypecmbx.SelectedItem).Content.ToString();
                     string insurance = insurancedatepicker.SelectedDate.Value.ToString("yyyy-MM-dd");
-                    string servicedate = servicedatepicker.SelectedDate.Value.ToString("yyyy-MM-dd");
-                    string lpg = lpgdatepicker.IsEnabled && lpgdatepicker.SelectedDate.HasValue ? lpgdatepicker.SelectedDate.Value.ToString("yyyy-MM-dd") : "Bez Gazu";
 
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
                         connection.Open();
-                        string insertQuery = "INSERT INTO cars (Cars_Brand, Cars_Model, Cars_Year, Cars_Vin, Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance, Cars_ServiceDate, Cars_LPG_Date) " +
-                                             "VALUES (@brand, @model, @year, @vin, @plateno, @fueltype, 'Nie wynajęte', @insurance, @servicedate, @lpg)";
+                        string insertQuery = "INSERT INTO cars (Cars_Brand, Cars_Model, Cars_Year, Cars_Vin, Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance) " +
+                                             "VALUES (@brand, @model, @year, @vin, @plateno, @fueltype, 'Nie wynajęte', @insurance)";
 
                         using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                         {
@@ -86,8 +69,6 @@ namespace Rent_a_car.pages.cars
                             insertCmd.Parameters.AddWithValue("@plateno", plateno);
                             insertCmd.Parameters.AddWithValue("@fueltype", fueltype);
                             insertCmd.Parameters.AddWithValue("@insurance", insurance);
-                            insertCmd.Parameters.AddWithValue("@servicedate", servicedate);
-                            insertCmd.Parameters.AddWithValue("@lpg", lpg);
 
                             int rowsAffected = insertCmd.ExecuteNonQuery();
                             if (rowsAffected > 0)

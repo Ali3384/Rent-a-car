@@ -37,7 +37,7 @@ namespace Rent_a_car.pages.rent
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT Cars_ID,Cars_Brand,Cars_Model,Cars_Year,Cars_Vin,Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance, Cars_ServiceDate, Cars_LPG_Date FROM cars WHERE Cars_Status != 'Wynajęte'";
+                    string query = "SELECT Cars_ID,Cars_Brand,Cars_Model,Cars_Year,Cars_Vin,Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance FROM cars WHERE Cars_Status != 'Wynajęte'";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataAdapter adapter = new MySqlDataAdapter(command);
 
@@ -51,8 +51,6 @@ namespace Rent_a_car.pages.rent
                     cars.Columns["Cars_Fuel"].ColumnName = "Rodzaj paliwa";
                     cars.Columns["Cars_Status"].ColumnName = "Status";
                     cars.Columns["Cars_Insurance"].ColumnName = "Ubezpieczenia";
-                    cars.Columns["Cars_ServiceDate"].ColumnName = "Przegląd";
-                    cars.Columns["Cars_LPG_Date"].ColumnName = "Ważność butli LPG";
                     carsdatagrid.ItemsSource = cars.DefaultView;
                 }
             }

@@ -9,6 +9,7 @@ using Rent_a_car.pages.cars;
 using System.Windows.Controls;
 using Rent_a_car.pages.payments;
 using System.Timers;
+using Rent_a_car.pages.other_pages;
 
 namespace Rent_a_car
 {
@@ -21,13 +22,28 @@ namespace Rent_a_car
         private Timer updateDatabaseTimer;
         public MainWindow()
         {
-            InitializeComponent();
-            rentframe.Content = new Rent_a_car.pages.rent.rentmainpage();
-            carsframe.Content = new Rent_a_car.pages.cars.carsmainpage();
-            clientsframe.Content = new Rent_a_car.pages.clients.clientsmainpage();
-            paymentsframe.Content = new Rent_a_car.pages.payments.paymentsmainpage();
-            UpdateDebitStatus();
-            InitializeUpdateDatabaseTimer();
+            CheckConnection checkConnection = new CheckConnection();
+            checkConnection.ShowDialog();
+            if (Properties.Settings.Default.connectioncheck == true)
+            {
+                Password password = new Password();
+                password.ShowDialog();
+                if (Properties.Settings.Default.passed == false)
+                {
+                    this.Close();
+                }
+                InitializeComponent();
+                rentframe.Content = new Rent_a_car.pages.rent.rentmainpage();
+                carsframe.Content = new Rent_a_car.pages.cars.carsmainpage();
+                clientsframe.Content = new Rent_a_car.pages.clients.clientsmainpage();
+                paymentsframe.Content = new Rent_a_car.pages.payments.paymentsmainpage();
+                UpdateDebitStatus();
+                InitializeUpdateDatabaseTimer();
+            }
+            else
+            {
+                this.Close();
+            }
         }
         public void ThemeChangeEvery()
         {

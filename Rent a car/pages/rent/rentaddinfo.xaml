@@ -1,0 +1,16 @@
+﻿<mah:MetroWindow x:Class="Rent_a_car.pages.rent.rentaddinfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Rent_a_car.pages.rent"
+        mc:Ignorable="d"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Dodatkowe dane" Height="400" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="/sedan.png">
+    <Grid>
+        <Label  Content="Dodatkowe dane o najmu:" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
+        <Button x:Name="infoaddbtn" Content="Zapisz" HorizontalAlignment="Center" Margin="0,327,0,0" VerticalAlignment="Top" Width="102" Background="CornflowerBlue" FontFamily="Orbitron" Click="infoaddbtn_Click" />
+        <TextBox x:Name="addinfo" HorizontalAlignment="Center" Margin="0,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="364" Height="243"/>
+
+    </Grid>
+</mah:MetroWindow>

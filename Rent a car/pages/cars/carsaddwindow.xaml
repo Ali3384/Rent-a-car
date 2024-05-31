@@ -20,7 +20,7 @@
         <TextBox x:Name="yeartxt" PreviewTextInput="yeartxt_PreviewTextInput" HorizontalAlignment="Left" Margin="163,181,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" Height="26" MaxLength="40"/>
 
         <Label Content="Rodzaj paliwa:" HorizontalAlignment="Left" Margin="370,20,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
-        <ComboBox Name="fueltypecmbx" HorizontalAlignment="Left" Margin="505,20,0,0" VerticalAlignment="Top" Width="166" SelectionChanged="fueltypecmbx_SelectionChanged">
+        <ComboBox Name="fueltypecmbx" HorizontalAlignment="Left" Margin="505,20,0,0" VerticalAlignment="Top" Width="166">
             <ComboBoxItem Content="Benzina"/>
             <ComboBoxItem Content="Diesel"/>
             <ComboBoxItem Content="Benzyna+LPG"/>
@@ -29,10 +29,6 @@
         </ComboBox>
         <Label  Content="Ubezpieczenia:" HorizontalAlignment="Left" Margin="370,60,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
         <DatePicker Name="insurancedatepicker" HorizontalAlignment="Left" Margin="505,59,0,0" VerticalAlignment="Top" Width="166"/>
-        <Label  Content="Przegląd:" HorizontalAlignment="Left" Margin="370,100,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
-        <DatePicker Name="servicedatepicker" HorizontalAlignment="Left" Margin="505,101,0,0" VerticalAlignment="Top" Width="166"/>
-        <Label  Content="Ważność butli LPG:" HorizontalAlignment="Left" Margin="373,140,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
-        <DatePicker Name="lpgdatepicker" HorizontalAlignment="Left" Margin="505,140,0,0" VerticalAlignment="Top" Width="166" IsEnabled="False"/>
         <Button Name="carsaddbtn" Content="Zapisać" HorizontalAlignment="Center" Margin="0,255,0,0" VerticalAlignment="Top" Width="102" Background="CornflowerBlue" FontFamily="Orbitron" Click="carsaddbtn_Click"/>
     </Grid>
 </mah:MetroWindow>

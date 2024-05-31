@@ -37,15 +37,17 @@ namespace Rent_a_car.pages.rent
 
         private void rentaddbtn_Click(object sender, RoutedEventArgs e)
         {
+
             if (!string.IsNullOrWhiteSpace(costtxt.Text) && datefrompicker.SelectedDate.HasValue)
             {
-
+                rentaddinfo rentaddinfo = new rentaddinfo();
+                rentaddinfo.ShowDialog();
                 MySqlConnection connection = null;
                 try
                 {
                     connection = new MySqlConnection(connectionString);
                     connection.Open();
-                    string insertQuery = "INSERT INTO rentings (Rent_Car_Plate_No, Rent_Client_Name, Rent_Client_Surname, Client_ID, Rent_Cost, Rent_From, Rent_Status) VALUES (@plate, @name, @surname, @clientid, @cost, @from, 'aktywny')";
+                    string insertQuery = "INSERT INTO rentings (Rent_Car_Plate_No, Rent_Client_Name, Rent_Client_Surname, Client_ID, Rent_Cost, Rent_From, Rent_Status, Rent_Information) VALUES (@plate, @name, @surname, @clientid, @cost, @from, 'aktywny', @addinfo)";
                     using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                     {
                         insertCmd.Parameters.AddWithValue("@plate", Properties.Settings.Default.SelectedCarPlate);
@@ -54,6 +56,7 @@ namespace Rent_a_car.pages.rent
                         insertCmd.Parameters.AddWithValue("@clientid", Properties.Settings.Default.SelectedClientID);
                         insertCmd.Parameters.AddWithValue("@cost", int.Parse(costtxt.Text));
                         insertCmd.Parameters.AddWithValue("@from", datefrompicker.SelectedDate.Value.ToString("yyyy-MM-dd"));
+                        insertCmd.Parameters.AddWithValue("@addinfo", Properties.Settings.Default.AddInfo);
                         insertCmd.ExecuteNonQuery();
                     }
                 }
@@ -67,7 +70,7 @@ namespace Rent_a_car.pages.rent
                     string periodUntil = datefrompicker.SelectedDate.Value.AddDays(7).ToString("yyyy-MM-dd");
                     connection = new MySqlConnection(connectionString);
                     connection.Open();
-                    string insertQuery = "INSERT INTO rentperiods (Car_Plate_No, Client_Name, Payment_Status, Period_Cost, Period_From, Period_Until, Period_Status, Client_ID,Rent_Status) VALUES (@plate, @name, 'Niezapłacona', @cost, @from, @until, 'aktiv', @clientid, 'aktywny')";
+                    string insertQuery = "INSERT INTO rentperiods (Car_Plate_No, Client_Name, Payment_Status, Period_Cost, Period_From, Period_Until, Period_Status, Client_ID,Rent_Status) VALUES (@plate, @name, 'Niezapłacona', @cost, @from, @until, 'aktywny', @clientid, 'aktywny')";
                     using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                     {
                         insertCmd.Parameters.AddWithValue("@plate", Properties.Settings.Default.SelectedCarPlate);

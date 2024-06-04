@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using Rent_a_car.pages.other_pages;
 using Rent_a_car.pages.rent;
 
 namespace Rent_a_car.pages.cars
@@ -191,6 +192,23 @@ namespace Rent_a_car.pages.cars
                 CarsInfoChange carsInfoChange = new CarsInfoChange();
                 carsInfoChange.ShowDialog();
                 updateCar();
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (carsdatagrid.SelectedItems.Count > 0)
+            {
+                foreach (DataRowView row in carsdatagrid.SelectedItems)
+                {
+                    System.Data.DataRow myRow = row.Row;
+                    Properties.Settings.Default.CarsSelectedID = myRow["ID"].ToString();
+                    Properties.Settings.Default.Save();
+                }
+                carsimagesxaml carsimagesxaml = new carsimagesxaml();
+                carsimagesxaml.ShowDialog();
+                //CarImages carImages = new CarImages();
+                //carImages.ShowDialog();
             }
         }
     }

@@ -44,6 +44,9 @@ namespace Rent_a_car.pages.cars
                 fueltypecmbx.SelectedItem != null &&
                 insurancedatepicker.SelectedDate.HasValue)
             {
+                carsimagesxaml carsimagesxaml = new carsimagesxaml();
+                carsimagesxaml.ShowDialog();
+
                 try
                 {
                     string brand = brandtxtbox.Text;

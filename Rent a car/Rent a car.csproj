@@ -44,6 +44,9 @@
     <Reference Include="Google.Protobuf, Version=3.25.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.25.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
+    <Reference Include="HandyControl, Version=3.5.1.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
+      <HintPath>..\packages\HandyControl.3.5.1\lib\net472\HandyControl.dll</HintPath>
+    </Reference>
     <Reference Include="K4os.Compression.LZ4, Version=1.3.5.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
       <HintPath>..\packages\K4os.Compression.LZ4.1.3.5\lib\net462\K4os.Compression.LZ4.dll</HintPath>
     </Reference>
@@ -241,6 +244,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="pages\cars\carsimagesxaml.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\cars\CarsInfoChange.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -258,6 +265,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="pages\other_pages\addpaymentwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\other_pages\CarImages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -306,6 +317,9 @@
     <Compile Include="pages\cars\carsaddwindow.xaml.cs">
       <DependentUpon>carsaddwindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pages\cars\carsimagesxaml.xaml.cs">
+      <DependentUpon>carsimagesxaml.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\cars\CarsInfoChange.xaml.cs">
       <DependentUpon>CarsInfoChange.xaml</DependentUpon>
     </Compile>
@@ -320,6 +334,9 @@
     </Compile>
     <Compile Include="pages\other_pages\addpaymentwindow.xaml.cs">
       <DependentUpon>addpaymentwindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\other_pages\CarImages.xaml.cs">
+      <DependentUpon>CarImages.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\other_pages\CheckConnection.xaml.cs">
       <DependentUpon>CheckConnection.xaml</DependentUpon>

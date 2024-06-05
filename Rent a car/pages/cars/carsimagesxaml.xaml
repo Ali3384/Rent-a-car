@@ -23,8 +23,9 @@
         </DataGrid>
         <Button Content="Images Add" Name="imageadd" HorizontalAlignment="Left" Margin="130,40,0,0" VerticalAlignment="Top" Click="imageadd_Click"/>
         <Button Content="Save" x:Name="save" HorizontalAlignment="Center" Margin="0,273,0,0" VerticalAlignment="Top" Click="save_Click" Width="76" />
-        <Image x:Name="mainimage" HorizontalAlignment="Left" Height="150" Margin="406,87,0,0" VerticalAlignment="Top" Width="308" Stretch="UniformToFill"/>
+        <Image x:Name="mainimage" HorizontalAlignment="Left" Height="150" Margin="406,87,0,0" VerticalAlignment="Top" Width="308" Stretch="Fill"/>
         <Button Content="Main Image add" x:Name="imageadd_Копировать" HorizontalAlignment="Left" Margin="511,40,0,0" VerticalAlignment="Top" Click="imageadd_Копировать_Click"/>
-
+        <Rectangle HorizontalAlignment="Left" Height="150" Margin="10,87,0,0" Stroke="Black" VerticalAlignment="Top" Width="309"/>
+        <Rectangle HorizontalAlignment="Left" Height="150" Margin="406,87,0,0" Stroke="Black" VerticalAlignment="Top" Width="309"/>
     </Grid>
 </mah:MetroWindow>

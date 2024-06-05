@@ -103,5 +103,22 @@ namespace Rent_a_car.pages.rent
                 current.Close();
             }
         }
+
+        private void carsdatagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (carsdatagrid.SelectedItems.Count > 0)
+            {
+                foreach (DataRowView row in carsdatagrid.SelectedItems)
+                {
+                    System.Data.DataRow myRow = row.Row;
+                    Properties.Settings.Default.SelectedCarPlate = myRow["Numer rejestracyjny"].ToString();
+                    Properties.Settings.Default.Save();
+                }
+                rentaddpage4window rentaddpage4Window = new rentaddpage4window();
+                rentaddpage4Window.ShowDialog();
+                Window current = Window.GetWindow(this);
+                current.Close();
+            }
+        }
     }
 }

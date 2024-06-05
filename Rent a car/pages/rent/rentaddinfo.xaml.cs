@@ -22,6 +22,7 @@ namespace Rent_a_car.pages.rent
         public rentaddinfo()
         {
             InitializeComponent();
+            Properties.Settings.Default.AddInfo = "Bez dodatkowych uwag";
         }
 
         private void infoaddbtn_Click(object sender, RoutedEventArgs e)
@@ -29,10 +30,12 @@ namespace Rent_a_car.pages.rent
             if(addinfo.Text.Length > 0)
             {
                 Properties.Settings.Default.AddInfo = addinfo.Text;
+                this.DialogResult = true;
             }
             else
             {
                 Properties.Settings.Default.AddInfo = "Bez dodatkowych uwag";
+                this.DialogResult = false;
             }
             Close();
         }

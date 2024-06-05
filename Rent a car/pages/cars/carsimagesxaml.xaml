@@ -1,4 +1,4 @@
-﻿<Window x:Class="Rent_a_car.pages.cars.carsimagesxaml"
+﻿<mah:MetroWindow x:Class="Rent_a_car.pages.cars.carsimagesxaml"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,11 +8,11 @@
         mc:Ignorable="d"
         Title="Zdjęcia" Height="349" Width="735" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"  Icon="/sedan.png">
     <Grid>
-        <DataGrid x:Name="listofimages" AutoGenerateColumns="False" Margin="10,87,10,17" CanUserAddRows="False" SelectionMode="Single" IsReadOnly="True">
+        <DataGrid x:Name="listofimages" AutoGenerateColumns="False" Margin="10,87,416,97" CanUserAddRows="False" SelectionMode="Single" IsReadOnly="True" BorderBrush="Black" Height="150">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="File Name" Binding="{Binding FileName}" Width="*"/>
-                <DataGridTextColumn Header="File Path" Binding="{Binding FilePath}" Width="*"/>
-                <DataGridTemplateColumn Header="Actions" Width="Auto">
+                <DataGridTextColumn Header="Nazwa pliku" Binding="{Binding FileName}" Width="*"/>
+                <DataGridTextColumn Header="Adres pliku" Binding="{Binding FilePath}" Width="*"/>
+                <DataGridTemplateColumn Header="Usun" Width="Auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Delete" Click="DeleteButton_Click" Tag="{Binding}"/>
@@ -21,7 +21,10 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Image add" Name="imageadd" HorizontalAlignment="Left" Margin="218,38,0,0" VerticalAlignment="Top" Click="imageadd_Click"/>
+        <Button Content="Images Add" Name="imageadd" HorizontalAlignment="Left" Margin="130,40,0,0" VerticalAlignment="Top" Click="imageadd_Click"/>
+        <Button Content="Save" x:Name="save" HorizontalAlignment="Center" Margin="0,273,0,0" VerticalAlignment="Top" Click="save_Click" Width="76" />
+        <Image x:Name="mainimage" HorizontalAlignment="Left" Height="150" Margin="406,87,0,0" VerticalAlignment="Top" Width="308" Stretch="UniformToFill"/>
+        <Button Content="Main Image add" x:Name="imageadd_Копировать" HorizontalAlignment="Left" Margin="511,40,0,0" VerticalAlignment="Top" Click="imageadd_Копировать_Click"/>
 
     </Grid>
-</Window>
+</mah:MetroWindow>

@@ -9,7 +9,7 @@
       Title="rentaddpage1" ShowsNavigationUI="False">
 
     <Grid Background="WhiteSmoke">
-        <DataGrid Name="clientsdatagrid" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="0,150,0,0" Background="White" FontFamily="Times New Roman" HorizontalGridLinesBrush="Blue" VerticalGridLinesBrush="Blue" GridLinesVisibility="Horizontal" >
+        <DataGrid Name="clientsdatagrid" MouseDoubleClick="clientsdatagrid_MouseDoubleClick" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="0,150,0,0" Background="White" FontFamily="Times New Roman" HorizontalGridLinesBrush="Blue" VerticalGridLinesBrush="Blue" GridLinesVisibility="Horizontal" SelectionChanged="clientsdatagrid_SelectionChanged" >
 
         </DataGrid>
         <Button Name="nextbtn" Content="Dalej" HorizontalAlignment="Left" Margin="1005,97,0,0" VerticalAlignment="Top" Width="131" Background="LightBlue" Height="38" FontFamily="Orbitron" Click="nextbtn_Click"/>

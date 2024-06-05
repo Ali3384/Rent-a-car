@@ -102,5 +102,26 @@ namespace Rent_a_car.pages.rent
                 NavigationService.Navigate(new rentaddpage2());
             }
         }
+
+        private void clientsdatagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void clientsdatagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (clientsdatagrid.SelectedItems.Count > 0)
+            {
+                foreach (DataRowView row in clientsdatagrid.SelectedItems)
+                {
+                    System.Data.DataRow myRow = row.Row;
+                    Properties.Settings.Default.SelectedClientName = myRow["Imie"].ToString();
+                    Properties.Settings.Default.SelectedClientSurname = myRow["Nazwisko"].ToString();
+                    Properties.Settings.Default.SelectedClientID = myRow["ID"].ToString();
+                    Properties.Settings.Default.Save();
+                }
+                NavigationService.Navigate(new rentaddpage2());
+            }
+        }
     }
 }

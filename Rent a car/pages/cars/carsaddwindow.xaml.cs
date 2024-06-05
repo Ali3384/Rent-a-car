@@ -44,9 +44,9 @@ namespace Rent_a_car.pages.cars
                 fueltypecmbx.SelectedItem != null &&
                 insurancedatepicker.SelectedDate.HasValue)
             {
+                Properties.Settings.Default.SelectedCarPlate = platenotxt.Text;
                 carsimagesxaml carsimagesxaml = new carsimagesxaml();
                 carsimagesxaml.ShowDialog();
-
                 try
                 {
                     string brand = brandtxtbox.Text;
@@ -60,8 +60,8 @@ namespace Rent_a_car.pages.cars
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
                         connection.Open();
-                        string insertQuery = "INSERT INTO cars (Cars_Brand, Cars_Model, Cars_Year, Cars_Vin, Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance) " +
-                                             "VALUES (@brand, @model, @year, @vin, @plateno, @fueltype, 'Nie wynajęte', @insurance)";
+                        string insertQuery = "INSERT INTO cars (Cars_Brand, Cars_Model, Cars_Year, Cars_Vin, Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance, Cars_Images_Sources, Cars_Image) " +
+                                             "VALUES (@brand, @model, @year, @vin, @plateno, @fueltype, 'Nie wynajęte', @insurance, @sources, @image)";
 
                         using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                         {
@@ -72,7 +72,8 @@ namespace Rent_a_car.pages.cars
                             insertCmd.Parameters.AddWithValue("@plateno", plateno);
                             insertCmd.Parameters.AddWithValue("@fueltype", fueltype);
                             insertCmd.Parameters.AddWithValue("@insurance", insurance);
-
+                            insertCmd.Parameters.AddWithValue("@sources", Properties.Settings.Default.CarSelectedImages);
+                            insertCmd.Parameters.AddWithValue("@image", Properties.Settings.Default.CarSelectedMainImageName);
                             int rowsAffected = insertCmd.ExecuteNonQuery();
                             if (rowsAffected > 0)
                             {

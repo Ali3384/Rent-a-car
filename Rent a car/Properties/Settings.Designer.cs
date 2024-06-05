@@ -321,5 +321,41 @@ namespace Rent_a_car.Properties {
                 this["connectioncheck"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CarSelectedImages {
+            get {
+                return ((string)(this["CarSelectedImages"]));
+            }
+            set {
+                this["CarSelectedImages"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CarSelectedMainImage {
+            get {
+                return ((string)(this["CarSelectedMainImage"]));
+            }
+            set {
+                this["CarSelectedMainImage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CarSelectedMainImageName {
+            get {
+                return ((string)(this["CarSelectedMainImageName"]));
+            }
+            set {
+                this["CarSelectedMainImageName"] = value;
+            }
+        }
     }
 }

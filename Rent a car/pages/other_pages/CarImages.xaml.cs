@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -25,12 +26,14 @@ namespace Rent_a_car.pages.other_pages
         string connectionString = Properties.Settings.Default.ConnectionString;
         string mainimage;
         string images;
+        DataTable imagesdata = new DataTable();
         public CarImages()
         {
             InitializeComponent();
             ImageList = new List<BitmapImage>();
             DataContext = this; // Set the DataContext to this window
             GetImages();
+            fillImagesTable();
         }
 
         public void GetImages()
@@ -81,6 +84,80 @@ namespace Rent_a_car.pages.other_pages
             {
                 MessageBox.Show("Error while getting data: " + ex.Message);
             }
+        }
+        private void fillImagesTable()
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "SELECT Images_Id, Image_Name FROM images WHERE Image_Type = 'Main' AND Image_ForCar = @plate";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@plate", Properties.Settings.Default.CarSelectedCarPlate);
+
+                    // Create a data adapter and fill the data table
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                    adapter.Fill(imagesdata);
+
+                    // Rename columns if needed
+                    imagesdata.Columns["Images_Id"].ColumnName = "ID";
+                    imagesdata.Columns["Image_Name"].ColumnName = "Nazwa pliku";
+
+                    // Assign the data table to the data grid
+                    imagesdatagrid.ItemsSource = imagesdata.DefaultView;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while filling data: " + ex.Message);
+            }
+        }
+        private void deleteimage_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Czy chcesz usunąć wybrany plik?",
+                    "Czy jesteś pewien ?",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                if (imagesdatagrid.SelectedItem != null)
+                {
+                    // Cast the selected item to a DataRowView to access its columns
+                    var selectedItem = imagesdatagrid.SelectedItem as DataRowView;
+
+                    if (selectedItem != null)
+                    {
+                        // Get the value of the "Numer Vin" column
+                        string selectedID = selectedItem["ID"].ToString();
+                        try
+                        {
+                            MySqlConnection connection = new MySqlConnection(connectionString);
+                            connection.Open();
+
+                            string updateQuery = "DELETE FROM images WHERE Images_Id = @id";
+                            using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, connection))
+                            {
+                                updateCmd.Parameters.AddWithValue("@id", selectedID);
+                                updateCmd.ExecuteNonQuery();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error while delete car");
+                        }
+                    }
+                    updateImages();
+                }
+            }
+
+        }
+        public void updateImages()
+        {
+            imagesdata.Clear();
+            imagesdata.Columns["ID"].ColumnName = "Images_Id";
+            imagesdata.Columns["Nazwa pliku"].ColumnName = "Image_Name";
+            fillImagesTable();
+            imagesdatagrid.Items.Refresh();
         }
     }
 }

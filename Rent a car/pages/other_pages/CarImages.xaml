@@ -17,6 +17,7 @@
         <Image Name="mainimagebox" HorizontalAlignment="Left" Height="340"
                Margin="621,298,0,0" VerticalAlignment="Top" Width="540"
                Stretch="Fill"/>
-        <DataGrid x:Name="carsdatagrid" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="44,298,706,146" Background="White" FontFamily="Times New Roman" LoadingRow="carsdatagrid_LoadingRow" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="Blue" VerticalGridLinesBrush="Blue" Width="540" Height="340"/>
+        <DataGrid x:Name="imagesdatagrid" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="44,298,616,146" Background="White" FontFamily="Orbitron" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="Blue" VerticalGridLinesBrush="Blue" Width="540" Height="340"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="480,266,0,0" VerticalAlignment="Top" Click="deleteimage_Click"/>
     </Grid>
 </mah:MetroWindow>

@@ -103,6 +103,13 @@ namespace Rent_a_car.pages.cars
                     UploadFileToFtp(fileUrl, image.FilePath, username, password);
                 }
 
+                // Upload the main image
+                if (!string.IsNullOrEmpty(Properties.Settings.Default.CarSelectedMainImage))
+                {
+                    string mainImageUrl = $"{folderUrl}/{Properties.Settings.Default.CarSelectedMainImageName}";
+                    UploadFileToFtp(mainImageUrl, Properties.Settings.Default.CarSelectedMainImage, username, password);
+                }
+
                 MessageBox.Show("Images uploaded successfully.");
                 this.Close();
             }
@@ -111,6 +118,7 @@ namespace Rent_a_car.pages.cars
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+
 
         private void CreateFtpFolder(string folderUrl, string username, string password)
         {

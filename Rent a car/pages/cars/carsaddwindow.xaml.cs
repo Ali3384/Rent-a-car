@@ -49,19 +49,19 @@ namespace Rent_a_car.pages.cars
                 carsimagesxaml.ShowDialog();
                 try
                 {
-                    string brand = brandtxtbox.Text;
-                    string model = modeltxt.Text;
-                    string vinno = vinnotxt.Text;
-                    string plateno = platenotxt.Text;
-                    int year = int.Parse(yeartxt.Text);
-                    string fueltype = ((ComboBoxItem)fueltypecmbx.SelectedItem).Content.ToString();
-                    string insurance = insurancedatepicker.SelectedDate.Value.ToString("yyyy-MM-dd");
+                     brand = brandtxtbox.Text;
+                     model = modeltxt.Text;
+                     vinno = vinnotxt.Text;
+                     plateno = platenotxt.Text;
+                     year = int.Parse(yeartxt.Text);
+                     fueltype = ((ComboBoxItem)fueltypecmbx.SelectedItem).Content.ToString();
+                    insurance = insurancedatepicker.SelectedDate.Value.ToString("yyyy-MM-dd");
 
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
                         connection.Open();
-                        string insertQuery = "INSERT INTO cars (Cars_Brand, Cars_Model, Cars_Year, Cars_Vin, Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance, Cars_Images_Sources, Cars_Image) " +
-                                             "VALUES (@brand, @model, @year, @vin, @plateno, @fueltype, 'Nie wynajęte', @insurance, @sources, @image)";
+                        string insertQuery = "INSERT INTO cars (Cars_Brand, Cars_Model, Cars_Year, Cars_Vin, Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance, Cars_Image) " +
+                                             "VALUES (@brand, @model, @year, @vin, @plateno, @fueltype, 'Nie wynajęte', @insurance, @image)";
 
                         using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                         {
@@ -71,8 +71,7 @@ namespace Rent_a_car.pages.cars
                             insertCmd.Parameters.AddWithValue("@vin", vinno);
                             insertCmd.Parameters.AddWithValue("@plateno", plateno);
                             insertCmd.Parameters.AddWithValue("@fueltype", fueltype);
-                            insertCmd.Parameters.AddWithValue("@insurance", insurance);
-                            insertCmd.Parameters.AddWithValue("@sources", Properties.Settings.Default.CarSelectedImages);
+                            insertCmd.Parameters.AddWithValue("@insurance", insurance);;
                             insertCmd.Parameters.AddWithValue("@image", Properties.Settings.Default.CarSelectedMainImageName);
                             int rowsAffected = insertCmd.ExecuteNonQuery();
                             if (rowsAffected > 0)
@@ -90,6 +89,7 @@ namespace Rent_a_car.pages.cars
                 {
                     MessageBox.Show("Error while inserting data: " + ex.Message);
                 }
+                InsertImagesIntoDatabase(connectionString);
             }
             else
             {
@@ -103,5 +103,59 @@ namespace Rent_a_car.pages.cars
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
+        public List<string> CarSelectedImagesList { get; private set; }
+
+        // Method to split the string and store the result in the property
+        public void SplitCarSelectedImages()
+        {
+            // Retrieve the string from settings
+            string carSelectedImages = Properties.Settings.Default.CarSelectedImages;
+
+            // Check if the string is null or empty
+            if (string.IsNullOrEmpty(carSelectedImages))
+            {
+                CarSelectedImagesList = new List<string>();
+                return;
+            }
+
+            // Split the string into an array using ';' as the separator
+            string[] imagesArray = carSelectedImages.Split(';');
+
+            // Convert the array to a list, removing any empty entries
+            CarSelectedImagesList = imagesArray.Where(image => !string.IsNullOrWhiteSpace(image)).ToList();
+        }
+
+        // Method to insert image names into the database
+        public void InsertImagesIntoDatabase(string connectionString)
+        {
+            // Split the images first
+            SplitCarSelectedImages();
+
+            // Ensure there are images to insert
+            if (CarSelectedImagesList == null || !CarSelectedImagesList.Any())
+            {
+                Console.WriteLine("No images to insert.");
+                return;
+            }
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                foreach (var imageName in CarSelectedImagesList)
+                {
+                    string query = "INSERT INTO images (Image_Name, Image_Type, Image_ForCar) VALUES (@ImageName, 'Main', @carplate)";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@ImageName", imageName);
+                        cmd.Parameters.AddWithValue("@carplate", plateno);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
     }
 }

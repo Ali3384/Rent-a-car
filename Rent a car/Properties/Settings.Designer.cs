@@ -357,5 +357,17 @@ namespace Rent_a_car.Properties {
                 this["CarSelectedMainImageName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CarSelectedCarPlate {
+            get {
+                return ((string)(this["CarSelectedCarPlate"]));
+            }
+            set {
+                this["CarSelectedCarPlate"] = value;
+            }
+        }
     }
 }

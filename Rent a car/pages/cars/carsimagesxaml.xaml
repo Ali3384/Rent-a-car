@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Rent_a_car.pages.cars"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="Zdjęcia" Height="349" Width="735" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"  Icon="/sedan.png">
+        Title="Zdjęcia" Height="349" Width="735" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"  Icon="/sedan.png" FontFamily="Orbitron">
     <Grid>
-        <DataGrid x:Name="listofimages" AutoGenerateColumns="False" Margin="10,87,416,97" CanUserAddRows="False" SelectionMode="Single" IsReadOnly="True" BorderBrush="Black" Height="150">
+        <DataGrid x:Name="listofimages" AutoGenerateColumns="False" Margin="10,87,395,96" CanUserAddRows="False" FontFamily="Orbitron" SelectionMode="Single" IsReadOnly="True" BorderBrush="Black" Height="150" HorizontalGridLinesBrush="Blue" VerticalGridLinesBrush="Blue" GridLinesVisibility="All">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa pliku" Binding="{Binding FileName}" Width="*"/>
                 <DataGridTextColumn Header="Adres pliku" Binding="{Binding FilePath}" Width="*"/>
@@ -21,11 +21,11 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Images Add" Name="imageadd" HorizontalAlignment="Left" Margin="130,40,0,0" VerticalAlignment="Top" Click="imageadd_Click"/>
-        <Button Content="Save" x:Name="save" HorizontalAlignment="Center" Margin="0,273,0,0" VerticalAlignment="Top" Click="save_Click" Width="76" />
+        <Button Content="Images Add" Name="imageadd" FontFamily="Orbitron" Background="CornflowerBlue" HorizontalAlignment="Left" Margin="130,40,0,0" VerticalAlignment="Top" Click="imageadd_Click"/>
+        <Button Content="Save" x:Name="save" FontFamily="Orbitron" Background="CornflowerBlue" HorizontalAlignment="Center" Margin="0,273,0,0" VerticalAlignment="Top" Click="save_Click" Width="76" />
         <Image x:Name="mainimage" HorizontalAlignment="Left" Height="150" Margin="406,87,0,0" VerticalAlignment="Top" Width="308" Stretch="Fill"/>
-        <Button Content="Main Image add" x:Name="imageadd_Копировать" HorizontalAlignment="Left" Margin="511,40,0,0" VerticalAlignment="Top" Click="imageadd_Копировать_Click"/>
-        <Rectangle HorizontalAlignment="Left" Height="150" Margin="10,87,0,0" Stroke="Black" VerticalAlignment="Top" Width="309"/>
+        <Button Content="Main Image add" FontFamily="Orbitron" Background="CornflowerBlue" x:Name="imageadd_Копировать" HorizontalAlignment="Left" Margin="511,40,0,0" VerticalAlignment="Top" Click="imageadd_Копировать_Click"/>
+        <Rectangle HorizontalAlignment="Left" Height="150" Margin="10,87,0,0" Stroke="Black" VerticalAlignment="Top" Width="330"/>
         <Rectangle HorizontalAlignment="Left" Height="150" Margin="406,87,0,0" Stroke="Black" VerticalAlignment="Top" Width="309"/>
     </Grid>
 </mah:MetroWindow>

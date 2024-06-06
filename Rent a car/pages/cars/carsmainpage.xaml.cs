@@ -202,13 +202,11 @@ namespace Rent_a_car.pages.cars
                 foreach (DataRowView row in carsdatagrid.SelectedItems)
                 {
                     System.Data.DataRow myRow = row.Row;
-                    Properties.Settings.Default.CarsSelectedID = myRow["ID"].ToString();
+                    Properties.Settings.Default.CarSelectedCarPlate = myRow["Numer rejestracyjny"].ToString();
                     Properties.Settings.Default.Save();
                 }
-                carsimagesxaml carsimagesxaml = new carsimagesxaml();
-                carsimagesxaml.ShowDialog();
-                //CarImages carImages = new CarImages();
-                //carImages.ShowDialog();
+                CarImages carImages = new CarImages();
+                carImages.ShowDialog();
             }
         }
     }

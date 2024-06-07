@@ -30,5 +30,11 @@
         <Label  Content="Ubezpieczenia:" HorizontalAlignment="Left" Margin="370,60,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
         <DatePicker Name="insurancedatepicker" HorizontalAlignment="Left" Margin="505,59,0,0" VerticalAlignment="Top" Width="166"/>
         <Button Name="carsaddbtn" Content="Zapisać" HorizontalAlignment="Center" Margin="0,255,0,0" VerticalAlignment="Top" Width="102" Background="CornflowerBlue" FontFamily="Orbitron" Click="carsaddbtn_Click"/>
+        <Label Content="Partner:" HorizontalAlignment="Left" Margin="370,101,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
+        <ComboBox x:Name="partnercombobox" HorizontalAlignment="Left" Margin="505,101,0,0" VerticalAlignment="Top" FontFamily="Orbitron" Width="166">
+
+        </ComboBox>
+        <Label  Content="Cena:" HorizontalAlignment="Left" Margin="371,140,0,0" VerticalAlignment="Top" FontFamily="Orbitron"/>
+        <TextBox x:Name="price" PreviewTextInput="price_PreviewTextInput" HorizontalAlignment="Left" Margin="505,140,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" MaxLength="40"/>
     </Grid>
 </mah:MetroWindow>

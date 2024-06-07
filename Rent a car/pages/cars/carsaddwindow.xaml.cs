@@ -29,9 +29,12 @@ namespace Rent_a_car.pages.cars
         int year;
         string fueltype;
         string insurance;
+        string partnerstr;
+        int pricesint;
         public carsaddwindow()
         {
             InitializeComponent();
+            partnercombobox.ItemsSource = Properties.Settings.Default.Partners;
         }
 
         private void carsaddbtn_Click(object sender, RoutedEventArgs e)
@@ -42,7 +45,7 @@ namespace Rent_a_car.pages.cars
                 !string.IsNullOrWhiteSpace(platenotxt.Text) &&
                 !string.IsNullOrWhiteSpace(yeartxt.Text) &&
                 fueltypecmbx.SelectedItem != null &&
-                insurancedatepicker.SelectedDate.HasValue)
+                insurancedatepicker.SelectedDate.HasValue && !string.IsNullOrWhiteSpace(price.Text) && partnercombobox.SelectedItem !=null)
             {
                 Properties.Settings.Default.SelectedCarPlate = platenotxt.Text;
                 carsimagesxaml carsimagesxaml = new carsimagesxaml();
@@ -54,14 +57,16 @@ namespace Rent_a_car.pages.cars
                      vinno = vinnotxt.Text;
                      plateno = platenotxt.Text;
                      year = int.Parse(yeartxt.Text);
-                     fueltype = ((ComboBoxItem)fueltypecmbx.SelectedItem).Content.ToString();
+                    pricesint = int.Parse(price.Text);
+                    partnerstr = partnercombobox.SelectedItem.ToString();
+                    fueltype = ((ComboBoxItem)fueltypecmbx.SelectedItem).Content.ToString();
                     insurance = insurancedatepicker.SelectedDate.Value.ToString("yyyy-MM-dd");
 
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
                     {
                         connection.Open();
-                        string insertQuery = "INSERT INTO cars (Cars_Brand, Cars_Model, Cars_Year, Cars_Vin, Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance, Cars_Image) " +
-                                             "VALUES (@brand, @model, @year, @vin, @plateno, @fueltype, 'Nie wynajęte', @insurance, @image)";
+                        string insertQuery = "INSERT INTO cars (Cars_Brand, Cars_Model, Cars_Year, Cars_Vin, Cars_No, Cars_Fuel, Cars_Status, Cars_Insurance, Cars_Image, Cars_Price, Cars_Partner) " +
+                                             "VALUES (@brand, @model, @year, @vin, @plateno, @fueltype, 'Nie wynajęte', @insurance, @image,@price,@partner)";
 
                         using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                         {
@@ -72,6 +77,8 @@ namespace Rent_a_car.pages.cars
                             insertCmd.Parameters.AddWithValue("@plateno", plateno);
                             insertCmd.Parameters.AddWithValue("@fueltype", fueltype);
                             insertCmd.Parameters.AddWithValue("@insurance", insurance);;
+                            insertCmd.Parameters.AddWithValue("@price", pricesint); ;
+                            insertCmd.Parameters.AddWithValue("@partner", partnerstr); ;
                             insertCmd.Parameters.AddWithValue("@image", Properties.Settings.Default.CarSelectedMainImageName);
                             int rowsAffected = insertCmd.ExecuteNonQuery();
                             if (rowsAffected > 0)
@@ -157,5 +164,10 @@ namespace Rent_a_car.pages.cars
             }
         }
 
+        private void price_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
     }
 }

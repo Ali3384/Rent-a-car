@@ -110,7 +110,6 @@ namespace Rent_a_car.pages.cars
                     UploadFileToFtp(mainImageUrl, Properties.Settings.Default.CarSelectedMainImage, username, password);
                 }
 
-                MessageBox.Show("Images uploaded successfully.");
                 this.Close();
             }
             catch (Exception ex)
@@ -228,6 +227,6 @@ namespace Rent_a_car.pages.cars
                 Properties.Settings.Default.CarSelectedMainImageName = fileDialog.SafeFileName;
                 mainimage.Source = new BitmapImage(new Uri(Properties.Settings.Default.CarSelectedMainImage));
             }
-            }
+        }
     }
 }

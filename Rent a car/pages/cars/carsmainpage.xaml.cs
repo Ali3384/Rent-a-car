@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,6 +26,7 @@ namespace Rent_a_car.pages.cars
     {
         string carscomboboxselection;
         string carsfiltertext;
+        string carPlate;
         DataTable cars = new DataTable();
         string connectionString = Properties.Settings.Default.ConnectionString;
         public carsmainpage()
@@ -156,6 +158,9 @@ namespace Rent_a_car.pages.cars
                     {
                         // Get the value of the "Numer Vin" column
                         string numerVin = selectedItem["ID"].ToString();
+                        carPlate = selectedItem["Numer rejestracyjny"].ToString();
+                        DeleteSQLandFTP();
+                        deleterecordsfromsql();
                         try
                         {
                             MySqlConnection connection = new MySqlConnection(connectionString);
@@ -178,6 +183,153 @@ namespace Rent_a_car.pages.cars
             }
         }
 
+        public void DeleteSQLandFTP()
+        {
+            
+           
+
+            try
+            {
+
+                List<string> imageNames = new List<string>();
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "SELECT Image_Name FROM images WHERE Image_Type = 'Main' AND Image_ForCar = @plate";
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@plate", carPlate);
+
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string imageName = reader.GetString("Image_Name");
+                                imageNames.Add(imageName);
+                            }
+                        }
+                    }
+                }
+
+                // Output the results
+                foreach (var imageName in imageNames)
+                {
+                    string ftpUrl = $"ftp://admin%2540adigcars.pl@host653587.hostido.net.pl/public_html/images/{carPlate}/{imageName}";
+                    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpUrl);
+                    request.Method = WebRequestMethods.Ftp.DeleteFile;
+                    request.Credentials = new NetworkCredential("admin@adigcars.pl", "M08011998m@");
+                    request.UsePassive = true;
+                    request.EnableSsl = false; // Set to true if your server requires SSL
+
+                    using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                    {
+                        // Check for successful status code
+                        if (response.StatusCode != FtpStatusCode.FileActionOK)
+                        {
+                            MessageBox.Show("Error deleting the file from FTP server");
+                        }
+                    }
+                }
+
+               
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while deleting the car: " + carPlate + ex.Message);
+            }
+            deletemainimage();
+           
+        }
+        public void deleterecordsfromsql()
+        {
+            string carplate2 = "";
+            try
+            {
+
+                
+                    var selectedItem = carsdatagrid.SelectedItem as DataRowView;
+
+                    if (selectedItem != null)
+                    {
+                        carplate2 = selectedItem["Numer rejestracyjny"].ToString();
+                    }
+               
+
+                string connectionString = Properties.Settings.Default.ConnectionString; // Replace with your actual connection string
+
+                using (MySqlConnection connection2 = new MySqlConnection(connectionString))
+                {
+                    connection2.Open();
+
+                    using (MySqlCommand command = new MySqlCommand("DELETE FROM images WHERE Image_ForCar = @no", connection2))
+                    {
+                        command.Parameters.AddWithValue("@no", carplate2);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                           
+                        }
+                        else
+                        {
+                            
+                        }
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("MySQL error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        public void deletemainimage()
+        {
+            try
+            {
+                using (MySqlConnection connection2 = new MySqlConnection(connectionString))
+                {
+                    connection2.Open();
+                    MySqlCommand command = new MySqlCommand("SELECT Cars_Image FROM cars WHERE Cars_No = @no", connection2);
+                    command.Parameters.AddWithValue("@no", carPlate);
+                    object result = command.ExecuteScalar();
+
+
+                    string mainimageName = result.ToString();
+
+
+                    // Now delete the file from the FTP server
+                    string ftpUrl = $"ftp://admin%2540adigcars.pl@host653587.hostido.net.pl/public_html/images/{carPlate}/{mainimageName}";
+                    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpUrl);
+                    request.Method = WebRequestMethods.Ftp.DeleteFile;
+                    request.Credentials = new NetworkCredential("admin@adigcars.pl", "M08011998m@");
+                    request.UsePassive = true;
+                    request.EnableSsl = false; // Set to true if your server requires SSL
+
+                    using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                    {
+                        // Check for successful status code
+                        if (response.StatusCode != FtpStatusCode.FileActionOK)
+                        {
+                            MessageBox.Show("Error deleting the file from FTP server");
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while deleting the car: " + ex.Message);
+            }
+        }
         private void carsdatagrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (carsdatagrid.SelectedItems.Count > 0)

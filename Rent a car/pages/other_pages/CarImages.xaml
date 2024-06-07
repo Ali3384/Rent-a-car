@@ -9,7 +9,7 @@
     xmlns:hc="https://handyorg.github.io/handycontrol"
     x:Class="Rent_a_car.pages.other_pages.CarImages"
     mc:Ignorable="d"
-    Title="Zdjęcia" Height="800" Width="1200" SnapsToDevicePixels="True"
+    Title="Zdjęcia" Height="730" Width="1200" SnapsToDevicePixels="True"
     WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="/sedan.png">
 
     <Grid>
@@ -17,7 +17,13 @@
         <Image Name="mainimagebox" HorizontalAlignment="Left" Height="340"
                Margin="621,298,0,0" VerticalAlignment="Top" Width="540"
                Stretch="Fill"/>
-        <DataGrid x:Name="imagesdatagrid" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="44,298,616,146" Background="White" FontFamily="Orbitron" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="Blue" VerticalGridLinesBrush="Blue" Width="540" Height="340"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="480,266,0,0" VerticalAlignment="Top" Click="deleteimage_Click"/>
+        <DataGrid x:Name="imagesdatagrid" d:ItemsSource="{Binding}" SelectionMode="Single" IsReadOnly="True" Margin="44,298,616,146" Background="White" FontFamily="Orbitron" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="Blue" VerticalGridLinesBrush="Blue" Width="540" Height="340" MouseDoubleClick="imagesdatagrid_MouseDoubleClick"/>
+        <Button Content="Usuń wybrane" Background="CornflowerBlue" FontFamily="Orbitron" HorizontalAlignment="Left" Margin="469,238,0,0" VerticalAlignment="Top" Click="deleteimage_Click" Width="115" Height="42"/>
+        <Button Content="Dodaj nowe" Background="CornflowerBlue" FontFamily="Orbitron" HorizontalAlignment="Left" Margin="44,238,0,0" VerticalAlignment="Top" Width="115" Height="42" Click="Button_Click"/>
+        <Rectangle HorizontalAlignment="Left" Height="340" Margin="44,298,0,0" Stroke="Black" VerticalAlignment="Top" Width="540"/>
+        <Rectangle HorizontalAlignment="Left" Height="340" Margin="621,298,0,0" Stroke="Black" VerticalAlignment="Top" Width="540"/>
+        <Label Content="Lista zdjęć:" FontFamily="Arial Black" HorizontalAlignment="Left" Margin="44,149,0,0" VerticalAlignment="Top" Width="540" Height="84" FontSize="48"/>
+        <Label Content="Główny obraz:" FontFamily="Arial Black" HorizontalAlignment="Left" Margin="621,149,0,0" VerticalAlignment="Top" Width="540" Height="84" FontSize="48"/>
+        <Button Content="Zmien" Name="changeimagebtn" Background="CornflowerBlue" FontFamily="Orbitron" HorizontalAlignment="Left" Margin="1044,238,0,0" VerticalAlignment="Top" Width="115" Height="42" Click="changeimagebtn_Click" />
     </Grid>
 </mah:MetroWindow>

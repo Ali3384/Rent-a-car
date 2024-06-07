@@ -1,0 +1,9 @@
+﻿<mah:MetroWindow x:Class="Rent_a_car.pages.other_pages.ImageDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="ImageDialog" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Image x:Name="imageControl" Stretch="Uniform" />
+    </Grid>
+</mah:MetroWindow>

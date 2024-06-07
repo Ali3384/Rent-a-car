@@ -276,6 +276,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="pages\other_pages\ImageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\other_pages\Password.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -340,6 +344,9 @@
     </Compile>
     <Compile Include="pages\other_pages\CheckConnection.xaml.cs">
       <DependentUpon>CheckConnection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\other_pages\ImageDialog.xaml.cs">
+      <DependentUpon>ImageDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\other_pages\Password.xaml.cs">
       <DependentUpon>Password.xaml</DependentUpon>
